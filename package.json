@@ -1,0 +1,27 @@
+{
+  "name": "angular1typescript",
+  "version": "1.0.0",
+  "description": "",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Rachnerd/angular1typescript.git"
+  },
+  "author": "Rachnerd",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Rachnerd/angular1typescript/issues"
+  },
+  "homepage": "https://github.com/Rachnerd/angular1typescript#readme",
+  "devDependencies": {
+    "babelify": "^7.2.0",
+    "browserify": "^13.0.0",
+    "gulp": "^3.9.1",
+    "gulp-watch": "^4.3.5",
+    "tsify": "^0.14.1",
+    "vinyl-source-stream": "^1.1.0"
+  }
+}
