@@ -20,14 +20,14 @@ angular.module('fakeBackend', ['ngMockE2E'])
     .factory('BackendClasses' , function () {
         var id = 1,
             classes = {};
-        classes.Client = function (firstName, lastName) {
+        function Client(firstName, lastName) {
             this.firstName = firstName;
             this.lastName = lastName;
             this.id = id;
             this.contract = null;
             id += 1;
         };
-        classes.Contract = function (start, end, min, sms, data, priceAMonth) {
+        function Contract(start, end, min, sms, data, priceAMonth) {
             this.start = start;
             this.end = end;
             this.min = min;
@@ -36,13 +36,17 @@ angular.module('fakeBackend', ['ngMockE2E'])
             this.priceAMonth = priceAMonth;
             this.usages = {};
         };
-        classes.Usage = function (min, sms, data) {
+        function Usage (min, sms, data) {
             this.min = min;
             this.sms = sms;
             this.data = data;
         };
 
-        return classes;
+        return {
+            Client:Client,
+            Contract:Contract,
+            Usage:Usage
+        };
     })
     /**
      *  Service that holds our data (fake database).
