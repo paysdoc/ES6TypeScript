@@ -3,17 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <title>Angular 1 in TypeScript</title>
+    <!--<link rel="stylesheet" href="styles/reset.css">-->
     <script src="libs/angular.js"></script>
     <script src="libs/angular-mock.js"></script>
     <script src="libs/fake-backend.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/systemjs/0.19.25/system-csp-production.js"></script>
+    <script src="libs/system.js"></script>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.2.0/styles/darkula.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.2.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/systemjs/0.19.25/system-csp-production.js"></script>-->
     <script>
-        System.import('app.js').then(function() {
-            angular.bootstrap(document.body, ['qApp']);
+        System.defaultJSExtensions = true;
+        System.import('app').then(function() {
+            ///angular.bootstrap(document.body, ['qApp']);
         })
     </script>
+    <style>
+        pre {
+            margin: 0;
+            font-size: medium;
+        }
+    </style>
 </head>
 <body>
+    <!--<div ng-controller="TestCtrl as ctrl">-->
+        <!--{{ctrl.test}}-->
+    <!--</div>-->
+    <div style="width:50%">
 
+    </div>
 </body>
 </html>

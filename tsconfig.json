@@ -5,11 +5,12 @@
     "sourceMap": true,
     "declaration": false,
     "noImplicitAny": false,
-    "removeComments": true,
-    "noLib": false,
-    "emitDecoratorMetadata": true
+    "removeComments": true
   },
   "exclude": [
     "node_modules"
+  ],
+  "files": [
+    "./typings/angularjs/angular.d.ts"
   ]
 }

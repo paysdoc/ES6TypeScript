@@ -17,15 +17,10 @@
   },
   "homepage": "https://github.com/Rachnerd/angular1typescript#readme",
   "devDependencies": {
-    "angular": "^1.5.3",
-    "babelify": "^7.2.0",
-    "browserify": "^13.0.0",
     "gulp": "^3.9.1",
     "gulp-typescript": "^2.12.1",
     "gulp-watch": "^4.3.5",
     "rimraf": "^2.5.2",
-    "run-sequence": "^1.1.5",
-    "tsify": "^0.14.1",
-    "vinyl-source-stream": "^1.1.0"
+    "run-sequence": "^1.1.5"
   }
 }
