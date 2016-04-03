@@ -18,15 +18,19 @@ angular.module('fakeBackend', ['ngMockE2E'])
      *  Simple factory that returns some Classes to simulate backend objects.
      */
     .factory('BackendClasses' , function () {
-        var id = 1,
-            classes = {};
+        var id = 423874;
+        if(!!window.localStorage.clients) {
+            var clients = angular.fromJson(window.localStorage.clients);
+            if(clients.length != 0) {
+                id = clients[clients.length - 1].id + 1;
+            }
+        }
         function Client(firstName, lastName) {
             this.firstName = firstName;
             this.lastName = lastName;
-            this.id = id;
+            this.id = id++;
             this.contract = null;
-            id += 1;
-        };
+        }
         function Contract(start, end, min, sms, data, priceAMonth) {
             this.start = start;
             this.end = end;
@@ -35,12 +39,12 @@ angular.module('fakeBackend', ['ngMockE2E'])
             this.data = data;
             this.priceAMonth = priceAMonth;
             this.usages = {};
-        };
+        }
         function Usage (min, sms, data) {
             this.min = min;
             this.sms = sms;
             this.data = data;
-        };
+        }
 
         return {
             Client:Client,
@@ -57,7 +61,7 @@ angular.module('fakeBackend', ['ngMockE2E'])
             Contract = BackendClasses.Contract,
             Usage = BackendClasses.Usage;
 
-        this.clients = [];
+
 
         function getDate(day, month, year) {
             var date = new Date();
@@ -67,14 +71,29 @@ angular.module('fakeBackend', ['ngMockE2E'])
             return date;
         }
 
+        this.getClients = function () {
+            return angular.fromJson(window.localStorage.clients);
+        };
+        this.setClients = function (clients) {
+            window.localStorage.clients = angular.toJson(clients);
+        };
+        if(!!window.localStorage.clients) {
+            this.clients = this.getClients();
+            return;
+        }
+        var clients = [];
         var client1 = new Client('Jan', 'Berg'),
-            client2 = new Client('Karel', 'de Vries');
+            client2 = new Client('Karel', 'de Vries'),
+            client3 = new Client('Joep', 'Zanden'),
+            client4 = new Client('Hello', 'World');
 
-        client1.contract = new Contract(getDate(1, 5, 2014), getDate(1, 5, 2016), 1000, 1000, 3000);
-        client1.contract.usages['February'] = new Usage(232, 123, 2100);
-
-        this.clients.push(client1);
-        this.clients.push(client2);
+        //client1.contract = new Contract(getDate(1, 5, 2014), getDate(1, 5, 2016), 1000, 1000, 3000);
+        //client1.contract.usages['February'] = new Usage(232, 123, 2100);
+        clients.push(client1);
+        clients.push(client2);
+        clients.push(client3);
+        clients.push(client4);
+        this.setClients(clients);
     })
     /**
      *  Code that will be executed after this module is initialized.
@@ -89,7 +108,7 @@ angular.module('fakeBackend', ['ngMockE2E'])
          *  GET request to retrieve all clients (contracts not included).
          */
         $httpBackend.whenGET('/clients').respond(function(method, url, data, headers) {
-            var clientsWithoutContracts = angular.copy(BackendData.clients);
+            var clientsWithoutContracts = angular.copy(BackendData.getClients());
             for(var i in clientsWithoutContracts) {
                 delete clientsWithoutContracts[i].contract;
             }
@@ -102,8 +121,10 @@ angular.module('fakeBackend', ['ngMockE2E'])
         $httpBackend.whenPOST('/clients').respond(function(method, url, data, headers) {
             var fromJson = angular.fromJson(data);
             var newClient = new Client(fromJson.firstName, fromJson.lastName);
-            BackendData.clients.push(newClient);
-            return [200, newClient];
+            var clients = BackendData.getClients();
+            clients.push(newClient);
+            BackendData.setClients(clients);
+            return [201, {location: 'clients/' + newClient.id}];
         });
 
         /**
@@ -114,8 +135,9 @@ angular.module('fakeBackend', ['ngMockE2E'])
             test: function (url) {
                 if(regexClientId.test(url)) {
                     var id = url.match(regexClientId)[1];
-                    for(var i = 0;i < BackendData.clients.length; i++) {
-                        if(BackendData.clients[i].id == id) {
+                    var clients = BackendData.getClients();
+                    for(var i = 0;i < clients.length; i++) {
+                        if(clients[i].id == id) {
                             return true;
                         }
                     }
@@ -124,9 +146,10 @@ angular.module('fakeBackend', ['ngMockE2E'])
             }
         }).respond(function (method, url, data, headers) {
             var id = url.match(regexClientId)[1];
-            for(var i = 0;i < BackendData.clients.length; i++) {
-                if(BackendData.clients[i].id == id) {
-                    return [200, BackendData.clients[i]];
+            var clients = BackendData.getClients();
+            for(var i = 0;i < clients.length; i++) {
+                if(clients[i].id == id) {
+                    return [200, clients[i]];
                 }
             }
             return [404, { message: 'Not Found'}];
@@ -140,10 +163,12 @@ angular.module('fakeBackend', ['ngMockE2E'])
             }
         }).respond(function (method, url, data, headers) {
             var id = url.match(regexClientId)[1];
-            for(var i = 0;i < BackendData.clients.length; i++) {
-                if(BackendData.clients[i].id == id) {
-                    angular.extend(BackendData.clients[i], angular.fromJson(data));
-                    return [200, BackendData.clients[i]];
+            var clients = BackendData.getClients();
+            for(var i = 0;i < clients.length; i++) {
+                if(clients[i].id == id) {
+                    angular.extend(clients[i], angular.fromJson(data));
+                    BackendData.setClients(clients);
+                    return [204, {location: 'clients/' + clients[i].id}];
                 }
             }
             return [404, { message: 'Not Found'}];
@@ -158,10 +183,12 @@ angular.module('fakeBackend', ['ngMockE2E'])
             }
         }).respond(function (method, url, data, headers) {
             var id = url.match(regexClientId)[1];
-            for(var i = 0;i < BackendData.clients.length; i++) {
-                if(BackendData.clients[i].id == id) {
-                    BackendData.clients.splice(i, 1);
-                    return [200, { message: 'Client with id: ' + id +' deleted'}];
+            var clients = BackendData.getClients();
+            for(var i = 0;i < clients.length; i++) {
+                if(clients[i].id == id) {
+                    clients.splice(i, 1);
+                    BackendData.setClients(clients);
+                    return [204];
                 }
             }
             return [404,{ message: 'Not Found'}];

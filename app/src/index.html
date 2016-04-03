@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Angular 1 in TypeScript</title>
+    <link rel="stylesheet" href="../styles/reset.css">
+    <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/app.css">
+
+    <script src="../libs/angular.js"></script>
+    <script src="../libs/angular-route.js"></script>
+    <script src="../libs/angular-mock.js"></script>
+    <script src="../libs/fake-backend.js"></script>
+    <script src="../libs/system.js"></script>
+    <!--<script src="components/home/home.js"></script>-->
+    <!--<script src="components/login/login.js"></script>-->
+    <!--<script src="components/client_overview/client_overview.js"></script>-->
+    <!--<script src="components/client_detail/client_detail.js"></script>-->
+    <!--<script src="components_shared/header/header.js"></script>-->
+    <!--<script src="services/client.service.js"></script>-->
+    <!--<script src="services/user.service.js"></script>-->
+    <script>
+        const scripts = [
+                'components/home/home.js',
+                'components/login/login.js',
+                'components/client_overview/client_overview.js',
+                'components/client_detail/client_detail.js',
+                'components_shared/header/header.js',
+                'services/client.service.js',
+                'services/user.service.js'
+            ];
+        System.defaultJSExtensions = true;
+        System.import('./app').then(function() {
+            var loaded = 0;
+            for(var i = 0; i < scripts.length; i++) {
+                var script = document.createElement('script');
+                script.onload = function () {
+                    if(scripts.length == ++loaded) {
+                        console.log('all loaded');
+                        angular.bootstrap(document.body, ['qApp']);
+                    }
+                };
+                script.src = scripts[i];
+                document.head.appendChild(script);
+            }
+        });
+    </script>
+</head>
+<body>
+    <div ng-view="" id="application"></div>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<q-header back-url="/"></q-header>
+<div class="row first">
+    <p>Overzicht van alle klanten</p>
+</div>
+<div class="content">
+    <div class="list">
+        <div class="row box-shadow" ng-repeat="client in $ctrl.clients">
+            <div class="block first large">
+                <i class="material-icons client-icon">person</i>
+                <p class="title">{{client.firstName + ' ' + client.lastName}}</p>
+                <p class="description">Klantnr: {{client.id}}</p>
+            </div>
+            <div class="block small right icon">
+                <i class="material-icons arrow"  ng-if="$ctrl.user == 'admin'" ng-click="$ctrl.delete(client)">delete</i>
+                <i class="material-icons arrow" ng-click="$ctrl.navigateTo(client)">navigate_next</i>
+            </div>
+        </div>
+    </div>
+</div>
+<footer>
+    <div class="row" ng-if="$ctrl.user == 'admin'">
+        <div class="block full">
+            <form ng-submit="$ctrl.add()">
+                <div class="block">
+                    <input type="text" placeholder="First name" ng-model="$ctrl.client.firstName" required>
+                </div>
+                <div class="block">
+                    <input type="text" placeholder="Last name" ng-model="$ctrl.client.lastName" required>
+                </div>
+                <input type="submit" hidden="true">
+            </form>
+        </div>
+    </div>
+</footer>

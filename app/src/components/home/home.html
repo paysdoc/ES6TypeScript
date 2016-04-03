@@ -1,0 +1,26 @@
+<q-header></q-header>
+<div class="row first">
+    {{ !!user ? 'Welcome ' + user : 'Welcome stranger!'}}
+</div>
+<div class="content">
+    <div class="row large-height center" ng-if="!!user">
+        <div class="block center icon full" ng-click="showList()">
+            <i class="material-icons">view_list</i>
+            <p>Clients Overview</p>
+        </div>
+    </div>
+    <div class="row large-height center" ng-if="!user">
+        <div class="block center icon full" ng-click="showLogin()">
+            <i class="material-icons">check</i>
+            <p>Login</p>
+        </div>
+    </div>
+    <div class="row large-height center" ng-if="user == 'admin'">
+        <div class="block center icon full" ng-click="reset()">
+            <i class="material-icons">settings_backup_restore</i>
+            <p>Clear local storage</p>
+            <p>(default db values)</p>
+        </div>
+    </div>
+</div>
+<footer></footer>

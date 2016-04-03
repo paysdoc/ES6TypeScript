@@ -1,9 +1,9 @@
 var gulp = require('gulp'),
     watch = require('gulp-watch'),
     rimraf = require('rimraf'),
-    runSequence = require('run-sequence');
-var ts = require('gulp-typescript');
-var tsProject = ts.createProject('./tsconfig.json');
+    runSequence = require('run-sequence'),
+    ts = require('gulp-typescript'),
+    tsProject = ts.createProject('./tsconfig.json');
 
 gulp.task('default', ['build'], function () {
 });
@@ -13,7 +13,6 @@ gulp.task('build', ['clean'], function () {
 gulp.task('clean', function (cb) {
     return rimraf('./dist', cb);
 });
-
 gulp.task('ts-compile', function () {
     return gulp.src('app/**/*.ts')
         .pipe(ts(tsProject))
@@ -26,6 +25,7 @@ gulp.task('html-copy', function () {
 });
 gulp.task('js-copy', function () {
     gulp.src('app/**/*.js')
+        .pipe(watch('app/**/*.js'))
         .pipe(gulp.dest('dist'));
 });
 gulp.task('css-copy', function () {

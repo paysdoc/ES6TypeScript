@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "module": "amd",
+    "module": "system",
     "target": "es5",
     "sourceMap": true,
     "declaration": false,
@@ -9,8 +9,5 @@
   },
   "exclude": [
     "node_modules"
-  ],
-  "files": [
-    "./typings/angularjs/angular.d.ts"
   ]
 }
