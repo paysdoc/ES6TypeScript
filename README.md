@@ -194,7 +194,7 @@ willChange.content = 'OtherTest'; //ok
 willChange = {content: 'OtherTest'}; //error
 ```
 
-###Assignment 5
+###Assignment 5 Inheritance 
 Create a new file called client.ts inside the models directory. Inside the file create a Client class that extends from Person.
 For now the client also expects a firstName and lastName, but in stead of setting the values it'll pass it to the Person
 through a super call. 
@@ -210,3 +210,51 @@ class B extends A {
     }
 }
 ```
+
+##Assignments Typescript
+IMPORTANT
+From this moment onwards keep track of your nodejs/cmd/terminal where the gulp task is running.
+Typescript errors won't always compile, this means the browser won't be updated as well!
+
+###Assignment 1 Basic types
+Take a look at the Person class. Even tho it's located inside a typescript file, we haven't touched any Typescript yet.
+The first thing we can do is adding types to all variables and functions (return types) inside Person. [here](https://www.typescriptlang.org/docs/handbook/basic-types.html) is a link with some basic types.
+After this is done, create a new person in a variable and check your IDE's auto completion. Suddenly we know exactly
+what's expected and even get compiler errors if we put in the wrong values.
+```javascript
+class Example {
+    text:string;
+    constructor(text:string) {
+        this.text = text;
+    }
+    getNumber():number {
+        return 1;
+    }
+}
+```
+
+###Assignment 2 Access modifiers
+In many other languages it's good practice to make every single variable private and accessible through getters and setters.
+In JavaScript this isn't a common thing to do and feels very optional. Here follows an implementation that uses private instance members
+in a different way.
+
+Make the id in Person private and rename it to _id. Inside the constructor set _id to the generated id. Add a get method id
+that returns the _id. We aren't creating a setter because we don't want to be able to change the generated id.
+
+Print the id of an instantiated Person and try to set its id.
+```javascript
+class Example {
+    private _myVar;
+    get myVar() {
+        return _myVar;
+    }
+    set myVar(myVar) {
+        this._myVar = myVar;
+    }
+}
+```
+
+For the rest of the workshop, think about your Class variables/functions visibilities (public/private). This is also a handy tool
+to optimise your auto completion.
+
+##Assignment 3

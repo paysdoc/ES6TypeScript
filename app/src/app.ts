@@ -109,19 +109,31 @@ var idGen = idMaker();
 export class Person {
     firstName;
     lastName;
-    id;
+    private _id;
     constructor() {
-        this.id = idGen.next().value;
+        this._id = idGen.next().value;
+    }
+    get id() {
+        return this._id;
+    }
+    private test() {
+        console.log('test');
     }
 }
-class Client extends Person {
-    constructor() {
-        super();
-        console.log(this.id);
-    }
-}
-console.log(new Client());
-console.log(new Person());
-console.log(new Client());
-console.log(new Client());
+//class Client extends Person {
+//    constructor() {
+//        super();
+//        console.log(this.id);
+//    }
+//}
+//console.log(new Client());
+//console.log(new Person());
+//console.log(new Client());
+//console.log(new Client());
 
+class Example {
+    text:string;
+    getNumber():number {
+        return 1;
+    }
+}
