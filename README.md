@@ -343,8 +343,9 @@ class NotAbstractClass extends Example { //error Must implement a foo function.
 ```
 Abstract methods are methods without a body that MUST be implemented by the subclass of the abstract class.
 ```
-Since a Person will never have to greet another person, remove the body and add the 'abstract' keyword in front of it.
-The Typescript compiler should complain about the Client class for not having a greet method.
+Since a Person will never have to greet another person, remove the body and add the 'abstract' 
+keyword in front of it. The Typescript compiler should complain about the Client class for not
+having a greet method.
 ```
 ##Assignment 4 interfaces
 
