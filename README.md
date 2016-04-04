@@ -327,9 +327,10 @@ Person is a very generic class and term. In applications we never talk about a p
 admins. Those types of people have something in common, they're people. We want to define a person, but never instantiate it 
 because it only serves as a super class to other types of people.
 ```
-Remove all Person instantiations and make Person abstract by inserting the 'abstract' keyword before the 'class' keyword.
-Don't forget to move the _id generator out of the constructor since abstract classes can't have constructors here. 
-(It is possible to instantiate an abstract class if it has a constructor, this is probably a bug?).
+Remove all Person instantiations and make Person abstract by inserting the 'abstract' keyword 
+before the 'class' keyword. Don't forget to move the _id generator out of the constructor 
+because abstract classes can't have constructors here. (It is possible to instantiate an 
+abstract class if it has a constructor, this is probably a bug?).
 ```
 ###methods
 ```javascript
