@@ -92,6 +92,7 @@ _If your IDE does not support this feature, you have to manually import it. The 
 location of the file that is doing the import._
 ```javascript
 import {Person} from './models/person'; // './' is very important
+import {Person as P} from './models/person'; // also possible
 ```
 
 ####Default import/export (0..1 per file)
@@ -101,21 +102,24 @@ export default class Example {
     //...
 }
 ```
-Default exports are imported differently than regular imports.
+Default exports are imported differently than regular imports. Since there is only one default export per file 
+(if you define multiple, only the last will exported) the name doesn't matter.
 ```javascript
-import Person from './models/person'; //<- Works
-import RandomName from './models/person'; //<- Works
-import {default as RandomName} from './models/person'; //<- Works
-import RandomName, {Other} from './models/person'; //<- Works (if Other is exported obviously)
+import Example from './example'; //<- Works
+import RandomName from './example'; //<- Works
+import {default as RandomName} from './example'; //<- Works
+import RandomName, {Other} from './example'; //<- Works (let's assume Other is an exported class)
 ```
 
 ###Assignment 3 Playing with transpiling.
 Now that we have 2 interacting files, we're going to have a look at the different possible outputs by our transpiling 
-process. Take a look at tsconfig's target and module attributes and check the dist folder javascript files. 
+process. 
+```
+Take a look at tsconfig's target and module attributes and check the dist folder javascript files. 
 Change the target and module attributes and reset the gulp task to see the different javascript output.
 - target: es5 || es6 (output js version)
 - module: commonjs || amd || system 
-
+```
 Even tho the outputs look different, System.js is clever enough to interpret all of them.
 
 ###Assignment 4 Playing with new ES6 Features.
