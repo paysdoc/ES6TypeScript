@@ -63,9 +63,9 @@ This person file WILL be transpiled to js by Gulp but WILL NOT be included (yet)
 
 ```javascript
 // class example
-class ClassName {
-    var1;
-    var2;
+class Example {
+    value;
+    value2;
     constructor() {
     
     }
@@ -93,7 +93,7 @@ without brackets (since there can only be 1 default, the assigned name doesn't m
 import Person from './models/person'; //<- Works
 import RandomName from './models/person'; //<- Works
 import {default as RandomName} from './models/person'; //<- Works
-import RandomName, {OtherNormalExportedClasses} from './models/person'; //<- Works (if others are exported obviously)
+import RandomName, {Other} from './models/person'; //<- Works (if Other is exported obviously)
 ```
 
 ###Assignment 3 Playing with transpiling.
@@ -107,23 +107,24 @@ Even tho the outputs look different, System.js is clever enough to interpret all
 
 ###Assignment 4 Playing with new ES6 Features.
 ####Constructors
-Append the Person's constructor with 2 parameters, firstName and lastName.
-Let the constructor set its own values. Create a few persons with different names and console.log them.
 ```javascript
 class Example {
     foo;
     constructor(foo){
-        this.foo = foo;//inside classes instance variables are accessed through 'this'.
+        this.foo = foo;
     }
 }
 ```
+Append the Person's constructor with 2 parameters, firstName and lastName.
+Let the constructor set its own values. Create a few persons with different names and console.log them.
 
-####Class functions + custom interpolation.
-Let's create a toString function inside the person class that returns its first and last name.
+
+####Class methods + custom interpolation.
+Let's create a toString method inside the person class that returns its first and last name.
 ```javascript
 //class funtion with return example
 class Example {
-    exampleFn() {
+    foo() {
         return 'example';
     }
 }
@@ -138,7 +139,7 @@ var interpolation = `exampleText = ${exampleText}`;
 ```
 
 ####Default params.
-Give the person a greet function that expects a name and will console 'Hello ${name}!'.
+Give the person a greet method that expects a name and will console 'Hello ${name}!'.
 Imagine the person will say 'Hello nobody!' if we don't give it a name.
 In stead of doing an undefined check we simply give the name param a default value of 'nobody'.
 ```javascript
@@ -151,7 +152,7 @@ In stead of doing an undefined check we simply give the name param a default val
 Sometimes we don't necessarily expect a parameter. Now we can use the optional parameter.
 
 ####Rest param.
-Create a greetMany function that will iterate through a list of people and greet them by name.
+Create a greetMany method that will iterate through a list of people and greet them by name.
 Instead of expecting a list as param, we want to implement the rest param.
 
 ```javascript
@@ -164,9 +165,9 @@ restExample(1, 2, 3, 4) //4
 ```
 
 ####Generators.
-A completely new feature of ES6 is the generator function. Basically it's a function that can keep track of its own 
+A completely new feature of ES6 is the generator method. Basically it's a method that can keep track of its own 
 state. Create an id generator inside person.ts (above the Person class) and let it set the id of the person in its constructor.
-Notice the * right after the function keyword, no this is not a typo.
+Notice the * right after the method keyword, no this is not a typo.
 ```javascript
 function* idMaker(){
     var index = 0;
@@ -218,9 +219,9 @@ Typescript errors won't always compile, this means the browser won't be updated 
 
 ###Assignment 1 Basic types
 Take a look at the Person class. Even tho it's located inside a typescript file, we haven't touched any Typescript yet.
-The first thing we can do is adding types to all variables and functions (return types) inside Person. [here](https://www.typescriptlang.org/docs/handbook/basic-types.html) is a link with some basic types.
-After this is done, create a new person in a variable and check your IDE's auto completion. Suddenly we know exactly
-what's expected and even get compiler errors if we put in the wrong values.
+The first thing we can do is adding types to all variables and methods (return types) inside Person. [Here](https://www.typescriptlang.org/docs/handbook/basic-types.html) is a link with some basic types.
+After this is done, create a new person with a variable and check your IDE's auto completion. Now we know exactly
+what's expected and get compile errors if we put in the wrong values.
 ```javascript
 class Example {
     text:string;
@@ -234,7 +235,50 @@ class Example {
 ```
 
 ###Assignment 2 Access modifiers
+
+For the rest of the workshop, think about your Class variables/methods visibilities (public/private/protected). This is a handy tool
+to optimise your auto completion.
+
+####public
+
+Public exposes instance members to the outside.
+This means that these variables and methods can be accessed by other code.
+
+```javascript
+class Example {
+    public foo:string;
+    //foo:string; //same
+}
+let example = new Example();
+example.foo //ok
+example.foo = 'something'; //ok
+```
+
+####private
+
+```javascript
+class Example {
+    private foo:string;
+}
+let example = new Example();
+example.foo //error
+example.foo = 'something'; //error
+```
+
 In many other languages it's good practice to make every single variable private and accessible through getters and setters.
+
+```javascript
+class Example {
+    private _myVar;
+    get myVar() {
+        return _myVar;
+    }
+    set myVar(myVar) {
+        this._myVar = myVar;
+    }
+}
+```
+
 In JavaScript this isn't a common thing to do and feels very optional. Here follows an implementation that uses private instance members
 in a different way.
 
@@ -254,7 +298,54 @@ class Example {
 }
 ```
 
-For the rest of the workshop, think about your Class variables/functions visibilities (public/private). This is also a handy tool
-to optimise your auto completion.
+####protected
 
-##Assignment 3
+Protected variables/methods are private to the outside world, but can be called/modified by the instance itself or its subclasses.
+So imagine that all people can ask questions, meaning only they can take initiative to ask something. A protected method 'ask' would be
+the solution. Person will be able to ask a question just like every subclass (Client in this case).
+Implement a protected 'ask' method that consoles a question and call it (from within the instance).
+
+##Assignment 3 Abstract
+###classes
+
+Person is a very generic class and term. In applications we never talk about a person, we rather talk about clients, employees and
+admins. Those types of people have something in common, they're people. We want to define a person, but never instantiate it 
+because it only serves as a super class to other types of people.
+
+Remove all Person instantiations and make Person abstract by inserting the 'abstract' keyword before the 'class' keyword.
+Don't forget to move the _id generator out of the constructor since abstract classes can't have constructors here. 
+(It is possible to instantiate an abstract class if it has a constructor, this is probably a bug?).
+
+###methods
+
+Abstract methods are methods without a body that MUST be implemented by the subclass of the abstract class.
+Since a Person will never have to greet another person, remove the body and add the 'abstract' keyword in front of it.
+The Typescript compiler should complain about the Client class because it now must have a greet method with the same return type.
+
+##Assignment 4 interfaces
+
+##Assignment 5 Decorators
+###Class decorators
+<<Decorate a class so it gets registered with extra data Angular 2's @Component equivalent>>
+
+###Method decorators
+<<Decorate a method so it only executes when certain conditions are met @Secured('admin') equivalent>>
+
+###Param decorators
+<<Decorate a param so it prints>>
+
+##Assignment 6 Custom types
+
+While working in JavaScript you don't always want to make a class for passing some set of variables to a method.
+In Typescript it's possible to easily overcome this issue by specifying constructed parameter types inline.
+var iets: new Array<Client> = [];
+var paramObjToServer = {
+    _id: number,
+    text: string,
+    blabla: string
+}
+
+##Assignment 7 Existing JavaScript (declaration files .d.ts)
+
+If you have written a gigantic JavaScript library, you really don't want to rewrite the thing in TypeScript.
+That's why declaration files exist.

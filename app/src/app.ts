@@ -106,30 +106,44 @@ function* idMaker(){
         yield index++;
 }
 var idGen = idMaker();
-export class Person {
+interface IAuth {
+    role:string;
+}
+abstract class Person {
     firstName;
     lastName;
-    private _id;
-    constructor() {
-        this._id = idGen.next().value;
+    private _id = idGen.next().value;
+    protected askQueston ():void {
+        console.log(this.firstName + ': Question?');
     }
+
+    //constructor() {
+    //    this._id = idGen.next().value;
+    //}
     get id() {
         return this._id;
     }
-    private test() {
-        console.log('test');
+    private foo() {
+
+    }
+    abstract greet():string;
+}
+
+class Client extends Person {
+    constructor(firstName:string) {
+        super();
+        this.firstName = firstName;
+        console.log(this.id);
+        this.askQueston();
+    }
+    greet() {
+        return '';
     }
 }
-//class Client extends Person {
-//    constructor() {
-//        super();
-//        console.log(this.id);
-//    }
-//}
-//console.log(new Client());
+console.log(new Client('Jan'));
 //console.log(new Person());
-//console.log(new Client());
-//console.log(new Client());
+console.log(new Client('Karel'));
+console.log(new Client('Kees'));
 
 class Example {
     text:string;
