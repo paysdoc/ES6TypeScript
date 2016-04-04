@@ -76,7 +76,7 @@ _This person file WILL be transpiled by gulp-typescript to js, but WILL NOT be i
 ####Regular import/export (0..n per file)
 ```javascript
 export class Example {
-    value;
+    value = 123;
     //...
 }
 ```
@@ -317,21 +317,34 @@ Implement a protected 'ask' method that consoles a question and call it (from wi
 
 ##Assignment 3 Abstract
 ###classes
-
+```javascript
+abstract class Example {
+    
+}
+new Example() //error
+```
 Person is a very generic class and term. In applications we never talk about a person, we rather talk about clients, employees and
 admins. Those types of people have something in common, they're people. We want to define a person, but never instantiate it 
 because it only serves as a super class to other types of people.
-
+```
 Remove all Person instantiations and make Person abstract by inserting the 'abstract' keyword before the 'class' keyword.
 Don't forget to move the _id generator out of the constructor since abstract classes can't have constructors here. 
 (It is possible to instantiate an abstract class if it has a constructor, this is probably a bug?).
-
+```
 ###methods
-
+```javascript
+abstract class Example {
+    abstract foo();
+}
+class NotAbstractClass extends Example { //error Must implement a foo function.
+    
+}
+```
 Abstract methods are methods without a body that MUST be implemented by the subclass of the abstract class.
+```
 Since a Person will never have to greet another person, remove the body and add the 'abstract' keyword in front of it.
-The Typescript compiler should complain about the Client class because it now must have a greet method with the same return type.
-
+The Typescript compiler should complain about the Client class for not having a greet method.
+```
 ##Assignment 4 interfaces
 
 ##Assignment 5 Decorators
