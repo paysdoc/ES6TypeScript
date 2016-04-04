@@ -129,8 +129,8 @@ class Example {
 }
 ```
 
-In stead of appending some strings to each other, we want to use the new interpolation that uses ``.
-Inside these `` we can put strings and values.
+In stead of appending some strings to each other, we want to use the new interpolation that uses `.
+Inside these symbols we can put strings and values.
 
 ```javascript
 var exampleText = 'someText';
