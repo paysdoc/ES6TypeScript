@@ -4,22 +4,7 @@
     <meta charset="UTF-8">
     <title>ES6 + Typescript</title>
     <script src="../libs/system.js"></script>
-    <script src="test.js"></script>
-    <script>
-        /**
-         *  System.js will add a .js extension to every import.
-         *  On compiletime the IDE can find the appropriate ts files.
-         *  On runtime the files are transpiled to js and used in the dist folder.
-         */
-        System.config({
-            defaultJSExtensions: true
-        });
-        System.import('./app').catch(
-            console.error.bind(console)
-        );
-    </script>
 </head>
 <body>
-    <div ng-view="" id="application"></div>
 </body>
 </html>
