@@ -15,9 +15,7 @@ The following command is given by the Angular getting started guide:
 This file compiles and copies all src files to the distribution folder.
 
 ###tsconfig.json
-Options for the typescript compiler. Most important options for this workshop are:
-- target: es5 || es6 (output js version)
-- module: commonjs || amd || system 
+Options for the typescript compiler.
 
 ###/app
 Contains all libs and source files.
@@ -64,7 +62,7 @@ browser which means we're done with setting up System.js.
 Create a new directory called 'models' inside the /app/src/ directory and fill it with a person.ts file.
 Create a Person class inside the person.ts file. A person of this workshop has a firstName, lastName and id.
 
-This person file WILL be transpiled to js by Gulp but WILL NOT (yet) be included inside the application.
+This person file WILL be transpiled to js by Gulp but WILL NOT be included (yet) inside the application.
 
 ###Assignment 2 Importing/Exporting
 Remember how app.ts is the only file loaded in the browser so far? Now we want to include our person too.
@@ -81,11 +79,22 @@ import {Person} from './models/person';
 ```
 
 If everything compiles, try changing the Person export by inserting 'default' in between the 'export' and 'class'.
-There can only be 1 default export per file (+ 0...n normal exports). Default exports will be imported by a key word
-without brackets (since there can only be 1 default, the assignment name doesn't matter).
+There can only be 1 default export per file (+ 0...n normal exports). Default exports will be imported by a keyword
+without brackets (since there can only be 1 default, the assigned name doesn't matter).
 ```javascript
 import Person from './models/person'; //<- Works
 import RandomName from './models/person'; //<- Works
 import {default as RandomName} from './models/person'; //<- Works
 import RandomName, {OtherNormalExportedClasses} from './models/person'; //<- Works (if others are exported obviously)
 ```
+
+###Assignment 3 Playing with transpiling.
+Now that we have 2 interacting files, we're going to have a look at the different possible outputs by our transpiling 
+process. Take a look at tsconfig's target and module attributes and check the dist folder javascript files. 
+Change the target and module attributes and reset the gulp task to see the different javascript output.
+- target: es5 || es6 (output js version)
+- module: commonjs || amd || system 
+
+Even tho the outputs look different, System.js is clever enough to interpret all of them.
+
+
