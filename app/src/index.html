@@ -25,7 +25,7 @@
          *  Path's that have to be loaded AFTER the asynchronous import of System.js is completed.
          */
         const sources = [
-                'components/home/home.js',
+//                'components/home/home.js',
                 'components/login/login.js',
                 'components/client_overview/client_overview.js',
                 'components/client_detail/client_detail.js',
@@ -42,7 +42,7 @@
             for(var i = 0; i < sources.length; i++) {
                 var script = document.createElement('script');
                 script.onload = function () {
-                    if(scripts.length == ++loaded) {
+                    if(sources.length == ++loaded) {
                         onLoadCb();
                     }
                 };

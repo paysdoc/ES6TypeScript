@@ -1,18 +1,39 @@
 /// <reference path="../../typings/angularjs/angular.d.ts" />
 /// <reference path="../../typings/angularjs/angular-route.d.ts" />
+import HomeCtrl from "./components/home/home";
+
+//interface IAdditionalRouteInfo  {
+//    path: string;
+//    title:string;
+//    access_levels: [string]
+//}
+//abstract class Config {
+//    static additionalRouteInfo: Array<IAdditionalRouteInfo> = [];
+//}
+//Config.additionalRouteInfo.push({
+//    path: '/',
+//    title: 'Home',
+//    access_levels: ['admin']
+//});
+//console.log(Config.additionalRouteInfo);
 angular.module('qApp', ['fakeBackend', 'ngRoute'])
+    /**
+     *  In stead of declaring a controller externally, we now import a controller class
+     *  and assign it to the appropriate name in app.ts.
+     */
+    .controller('HomeCtrl', HomeCtrl)
     .constant('USER_ROLES', {
         ALL: '*',
         ADMIN: 'admin',
         EMPLOYEE: 'employee'
     })
-    .config(function ($logProvider, $routeProvider, USER_ROLES) {
-        $logProvider.debugEnabled(true);
-
+    .config(($logProvider, $routeProvider, USER_ROLES) => {
+        $logProvider.debugEnabled(false);
         $routeProvider
             .when('/', {
                 templateUrl: 'components/home/home.html',
                 controller: 'HomeCtrl',
+                controllerAs: '$ctrl',
                 access_levels: [USER_ROLES.ALL],
                 title: 'Home'
             })
@@ -52,6 +73,14 @@ angular.module('qApp', ['fakeBackend', 'ngRoute'])
     .run(function ($rootScope, $location, UserService) {
         $rootScope.$on('$routeChangeStart',
             function (evt, next, curr) {
+                //const additionalRoutesInfo = Config.additionalRouteInfo;
+                //for(var i in additionalRoutesInfo) {
+                //    let route = additionalRoutesInfo[i];
+                //    if(route.path == next.$$route.originalPath) {
+                //        console.log('match')
+                //        return;
+                //    }
+                //}
                 if(!UserService.authenticate(next.access_levels)) {
                     if (!!UserService.getUser()) {
                         alert('Not authorized');

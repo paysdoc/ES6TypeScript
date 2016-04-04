@@ -24,7 +24,7 @@ angular.module('qApp').controller('ClientDetailCtrl', function ($routeParams, $l
         this.updateActionsPerformed++;
         ClientService.update(angular.merge(this.client, this.localClient)).then(function (client) {
             self.client = client;
-        })
+        });
     };
 
     /**
