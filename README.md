@@ -56,21 +56,17 @@ browser which means we're done with setting up System.js.
 
 ##Assignments ES6
 ###Assignment 1 Classes
+```javascript
+class Example {
+    value;
+    //...
+}
+```
 Create a new directory called 'models' inside the /app/src/ directory and fill it with a person.ts file.
 Create a Person class inside the person.ts file. A person of this workshop has a firstName, lastName and id.
 
 This person file WILL be transpiled to js by Gulp but WILL NOT be included (yet) inside the application.
 
-```javascript
-// class example
-class Example {
-    value;
-    value2;
-    constructor() {
-    
-    }
-}
-```
 
 ###Assignment 2 Importing/Exporting
 Remember how app.ts is the only file loaded in the browser so far? Now we want to include our person too.
