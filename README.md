@@ -112,15 +112,14 @@ import RandomName, {Other} from './example'; //<- Works (let's assume Other is a
 ```
 
 ###Assignment 3 Playing with transpiling.
-Now that we have 2 interacting files, we're going to have a look at the different possible outputs by our transpiling 
+Now that we have 2 interacting files, we're going to have a look at the different possible outputs of the transpiling process.
 process. 
 ```
-Take a look at tsconfig's target and module attributes and check the dist folder javascript files. 
-Change the target and module attributes and reset the gulp task to see the different javascript output.
+Take a look at tsconfig's 'target' and 'module' attributes and check the dist folder javascript files content. 
+Change the target and/or module attributes and reset the gulp task to see the different ways of transpiling.
 - target: es5 || es6 (output js version)
 - module: commonjs || amd || system 
 ```
-Even tho the outputs look different, System.js is clever enough to interpret all of them.
 
 ###Assignment 4 Playing with new ES6 Features.
 ####Constructors
@@ -131,22 +130,27 @@ class Example {
         this.foo = foo;
     }
 }
+let example = new Example('value');
+```
+
 ```
 Append the Person's constructor with 2 parameters, firstName and lastName.
-Let the constructor set its own values. Create a few persons with different names and console.log them.
-
+Let the constructor set its own values. Create a few persons with different names and log them.
+```
 
 ####Class methods + custom interpolation.
-Let's create a toString method inside the person class that returns its first and last name.
 ```javascript
-//class funtion with return example
 class Example {
+    constructor() {}
     foo() {
         return 'example';
     }
 }
+let example = new Example('value');
+example.foo();
 ```
 
+Let's create a toString method inside the person class that returns its first and last name.
 In stead of appending some strings to each other, we want to use the new interpolation that uses `.
 Inside these symbols we can put strings and values.
 
@@ -253,8 +257,8 @@ class Example {
 
 ###Assignment 2 Access modifiers
 
-For the rest of the workshop, think about your Class variables/methods visibilities (public/private/protected). This is a handy tool
-to optimise your auto completion.
+For the rest of the workshop, think about your Class variables/methods visibilities (public/private/protected). This will help
+to optimise your auto completion and code structure.
 
 ####public
 
@@ -282,37 +286,26 @@ example.foo //error
 example.foo = 'something'; //error
 ```
 
-In many other languages it's good practice to make every single variable private and accessible through getters and setters.
-
+In Java it's considered a good practice to make every single variable private and accessible through getters and setters.
+In JavaScript this is also possible.
 ```javascript
 class Example {
-    private _myVar;
-    get myVar() {
-        return _myVar;
+    private _foo; //The underscore is there to prevent namecollision with the get/set method name.
+    get foo() {
+        return _foo;
     }
-    set myVar(myVar) {
-        this._myVar = myVar;
+    set foo(foo) {
+        this._foo = foo;
     }
 }
 ```
 
-In JavaScript this isn't a common thing to do and feels very optional. Here follows an implementation that uses private instance members
-in a different way.
-
-Make the id in Person private and rename it to _id. Inside the constructor set _id to the generated id. Add a get method id
-that returns the _id. We aren't creating a setter because we don't want to be able to change the generated id.
+```
+Make the id in Person private and rename it to _id. Inside the constructor set _id to the next value of 
+the IdGenerator. Add a get method id that returns the _id. A set id method is unnecassary because we don't
+want to let the outside world mess with the id.
 
 Print the id of an instantiated Person and try to set its id.
-```javascript
-class Example {
-    private _myVar;
-    get myVar() {
-        return _myVar;
-    }
-    set myVar(myVar) {
-        this._myVar = myVar;
-    }
-}
 ```
 
 ####protected
