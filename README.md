@@ -77,15 +77,15 @@ propose to import it.
 _If your IDE does not support this feature, you have to manually import it by importing the Person in brackets 
 from the relative path of the location of the class (or just switch IDE's)._
 ```javascript
-import {Person} from './models/person;
+import {Person} from './models/person';
 ```
 
 If everything compiles, try changing the Person export by inserting 'default' in between the 'export' and 'class'.
 There can only be 1 default export per file (+ 0...n normal exports). Default exports will be imported by a key word
 without brackets (since there can only be 1 default, the assignment name doesn't matter).
 ```javascript
-import Person from './models/person; //<- Works
-import RandomName from './models/person; //<- Works
-import {default as RandomName} from './models/person; //<- Works
-import RandomName, {OtherNormalExportedClasses} from './models/person; //<- Works (if others are exported obviously)
+import Person from './models/person'; //<- Works
+import RandomName from './models/person'; //<- Works
+import {default as RandomName} from './models/person'; //<- Works
+import RandomName, {OtherNormalExportedClasses} from './models/person'; //<- Works (if others are exported obviously)
 ```
