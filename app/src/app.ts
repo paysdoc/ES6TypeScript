@@ -1,13 +1,16 @@
-alert('App.ts is transpiled and executed!');
+//alert('App.ts is transpiled and executed!');
+
+function testRestParam(...params) {
+    return params.length;
+}
+testRestParam(1); //1
+testRestParam(1, 2, 3, 4); //4
+console.log(testRestParam(1));
+
+console.log(testRestParam(1, 2, 3, 4));
 //import Client from "./models/client";
 //import ES5Example = MyLib.ES5Example;
 //
-//function* idMaker(){
-//    var index = 0;
-//    while(true)
-//        yield index++;
-//}
-//var gen = idMaker();
 //
 ////var example:ES5Example = new ES5Example();
 ////console.log(example.getRandomNumber());

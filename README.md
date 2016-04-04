@@ -126,6 +126,7 @@ class ClassName {
 
 In stead of appending some strings to each other, we want to use the new interpolation that uses ` `.
 Inside these `` we can put strings and values (inside a class, you probably want to call its own variable by using 'this').
+
 ```javascript
 var exampleText = 'someText';
 var interpolation = `exampleText = ${exampleText}`;
@@ -140,4 +141,47 @@ In stead of doing an undefined check we simply give the name param a default val
     (param = 1) {
         console.log(param) //1 if it's called without parameter.
     }
+```
+
+####Rest param.
+Create a greetMany function that will iterate through a list of people and greet them by name.
+Instead of expecting a list as param, we want to implement the rest param.
+
+```javascript
+//rest param example
+function testRestParam(...params) {
+    return params.length;
+}
+testRestParam(1); //1
+testRestParam(1, 2, 3, 4) //4
+```
+
+####Generators.
+A completely new feature of ES6 is the generator function. Basically it's a function that can keep track of its own 
+state. Create an id generator inside person.ts (above the Person class) and let it set the id of the person in its constructor.
+Notice the * right after the function keyword, no this is not a typo.
+```javascript
+function* idMaker(){
+    var index = 0;
+    while(true)
+        yield index++;
+}
+var idGen = idMaker();
+console.log(idGen.next().value); //0
+console.log(idGen.next().value); //1
+console.log(idGen.next().value); //2
+```
+
+####Let and const keyword.
+"let is the new var" - [Is there any reason to use the “var” keyword in ES6?](http://programmers.stackexchange.com/questions/274342/is-there-any-reason-to-use-the-var-keyword-in-es6) 
+The new 'let' keyword has solved the block scoping issues of var and is recommended for ES6.
+
+Const are the new JS equivalent to Java's final.
+```javascript
+const wontChange = 'Test';
+wontChange = 'OtherTest'; //error
+
+const willChange = {content: 'Test'};
+willChange.content = 'OtherTest'; //ok
+willChange = {content: 'OtherTest'}; //error
 ```
