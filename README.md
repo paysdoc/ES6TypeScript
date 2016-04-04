@@ -350,7 +350,6 @@ function LogInAndOut (target: Object, propertyKey: string, descriptor: TypedProp
     console.debug(`${className}.${propertyKey} is called`);
 
     var originalMethod = descriptor.value;
-    //override the implementation.
     descriptor.value = function (...args:any[]) {
         //before method call
         console.debug("The method args are: " + JSON.stringify(args));
