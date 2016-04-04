@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <title>Angular 1 in TypeScript</title>
     <link rel="stylesheet" href="../styles/reset.css">
+    <link rel="stylesheet" href="../styles/app.css">
+
     <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="../styles/app.css">
 
     <script src="../libs/angular.js"></script>
     <script src="../libs/angular-route.js"></script>
@@ -25,7 +26,6 @@
          *  Path's that have to be loaded AFTER the asynchronous import of System.js is completed.
          */
         const sources = [
-//                'components/home/home.js',
                 'components/login/login.js',
                 'components/client_overview/client_overview.js',
                 'components/client_detail/client_detail.js',
@@ -72,7 +72,8 @@
                     loadScripts(function onLoad () {
                         angular.bootstrap(document.body, ['qApp']);
                     })
-                });
+                })
+                .catch(console.error.bind(console));
     </script>
 </head>
 <body>
