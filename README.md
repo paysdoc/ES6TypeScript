@@ -11,19 +11,19 @@ The following command is given by the Angular getting started guide:
 - npm run start (or "gulp build" if gulp is installed globally)
 
 ##Content
-###gulpfile.js
+gulpfile.js
 This file compiles and copies all src files to the distribution folder.
 
-###tsconfig.json
+tsconfig.json
 Options for the typescript compiler.
 
-###/app
+/app
 Contains all libs and source files.
 
-####/libs
+/libs
 For this part only System.js is required.
 
-###/dist (distribution) dir
+/dist (distribution) dir
 Contains all libs and source files compiled and ready for use. (Will be deleted every time gulp builds!!!)
 
 ##Assignments setup
@@ -112,14 +112,22 @@ Even tho the outputs look different, System.js is clever enough to interpret all
 ####Constructors
 Append the Person's constructor with 2 parameters, firstName and lastName.
 Let the constructor set its own values. Create a few persons with different names and console.log them.
+```javascript
+class Example {
+    foo;
+    constructor(foo){
+        this.foo = foo;
+    }
+}
+```
 
 ####Class functions + custom interpolation.
 Let's create a toString function inside the person class that returns its first and last name.
 ```javascript
 //class funtion with return example
-class ClassName {
-    fn() {
-        return '';
+class Example {
+    exampleFn() {
+        return 'example';
     }
 }
 ```
@@ -149,11 +157,11 @@ Instead of expecting a list as param, we want to implement the rest param.
 
 ```javascript
 //rest param example
-function testRestParam(...params) {
+function restExample(...params) {
     return params.length;
 }
-testRestParam(1); //1
-testRestParam(1, 2, 3, 4) //4
+restExample(1); //1
+restExample(1, 2, 3, 4) //4
 ```
 
 ####Generators.
@@ -174,9 +182,10 @@ console.log(idGen.next().value); //2
 
 ####Let and const keyword.
 "let is the new var" - [Is there any reason to use the “var” keyword in ES6?](http://programmers.stackexchange.com/questions/274342/is-there-any-reason-to-use-the-var-keyword-in-es6) 
+
 The new 'let' keyword has solved the block scoping issues of var and is recommended for ES6.
 
-Const are the new JS equivalent to Java's final.
+Const is the new JS equivalent to Java's final.
 ```javascript
 const wontChange = 'Test';
 wontChange = 'OtherTest'; //error
