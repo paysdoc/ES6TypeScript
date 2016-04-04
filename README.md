@@ -240,7 +240,7 @@ Typescript errors won't always compile, this means the browser won't be updated 
 
 ###Assignment 1 Basic types
 Take a look at the Person class. Even tho it's located inside a typescript file, we haven't touched any Typescript yet.
-The first thing we can do is adding types to all variables and methods (return types) inside Person. [Here](https://www.typescriptlang.org/docs/handbook/basic-types.html) is a link with some basic types.
+The first thing we can do is adding types to all variables and methods (return types) inside Person, [here](https://www.typescriptlang.org/docs/handbook/basic-types.html) is a link with some basic types.
 After this is done, create a new person with a variable and check your IDE's auto completion. Now we know exactly
 what's expected and get compile errors if we put in the wrong values.
 ```javascript
