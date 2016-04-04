@@ -35,8 +35,11 @@ This tasks calls the 'gulp-typescript' plugin with the source files and tells th
 the code with the options specified in tsconfig.
 
 ###Assignment 2
+Currently nothing is happening in our project. Inside the app.ts file is an alert saying everything worked out.
+To get this alert to show up we have to tell System.js to start importing the transpiled files.
 
-```javascript
+```html
+<script>
   /**
    *  System.js will add a .js extension to every import.
    *  On compiletime the IDE can find the appropriate ts files.
@@ -48,4 +51,5 @@ the code with the options specified in tsconfig.
   System.import('./app').catch(
       console.error.bind(console)
   );
+</script>
 ```
