@@ -123,8 +123,18 @@ class ClassName {
 ```
 
 In stead of appending some strings to each other, we want to use the new interpolation that uses ` `.
-Inside these `` we can put strings and values (inside a class you probably want to call its own variable by using 'this').
+Inside these `` we can put strings and values (inside a class, you probably want to call its own variable by using 'this').
 ```javascript
 var exampleText = 'someText';
 var interpolation = `exampleText = ${exampleText}`;
+```
+
+####Default and optional params.
+Give the person a greet function that expects a name and will console 'Hello ${name}!'.
+Imagine the person will say 'Hello nobody!' if we don't give it a name.
+In stead of doing an undefined check we simply give the name param a default value of 'nobody'.
+```javascript
+    (param = 1) {
+        console.log(param) //1 if it's called without parameter.
+    }
 ```
