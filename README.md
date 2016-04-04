@@ -63,7 +63,10 @@ class Example {
 }
 ```
 Create a new directory called 'models' inside the /app/src/ directory and fill it with a person.ts file.
-Create a Person class inside the person.ts file. A person of this workshop has a firstName, lastName and id.
+Create a Person class inside the person.ts file. A person of this workshop has:
+- firstName
+- lastName
+- id
 
 This person file WILL be transpiled to js by Gulp but WILL NOT be included (yet) inside the application.
 
