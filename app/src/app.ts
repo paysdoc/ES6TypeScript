@@ -1,5 +1,4 @@
 alert('App.ts is transpiled and executed!');
-/// <reference path="test.d.ts" />
 //import Client from "./models/client";
 //import ES5Example = MyLib.ES5Example;
 //
