@@ -65,31 +65,38 @@ class Example {
 
 ```
 Create a new directory called 'models' inside the /app/src/ directory and fill it with a person.ts file.
-Create a Person class inside the person.ts file. A person of this workshop has:
+Create a Person class inside the person.ts file with the following variables:
 - firstName
 - lastName
 - id
 ```
-_This person file WILL be transpiled to js by Gulp, but WILL NOT be included (yet) in the application._
+_This person file WILL be transpiled by gulp-typescript to js, but WILL NOT be included in the browser._
 
 ###Assignment 2 Importing/Exporting
-The only file imported by System.js so far is app.ts. To include the new Person class, we have to expose it to the outside world
-```
-Export the person by inserting the 'export' keyword in front of the 'class' keyword. Now person.ts exposes a person class ready to be
-imported by some other file.
-```
-Inside our app.ts we can instantiate a new Person (var person = new Person()). Just type Person and you're IDE should recognize it and 
-propose to import it. 
-
-_If your IDE does not support this feature, you have to manually import it by importing the Person in brackets 
-from the relative path of the location of the class (or just switch IDE's)._
+####Normal import/export (0..n per file)
 ```javascript
-import {Person} from './models/person';
+export class Example {
+    value;
+    //...
+}
+```
+System.js is currently unaware of person.ts's existence because none of its files (app.ts) is importing it.
+Before person.ts can be imported it has to expose something to the outside world.
+```
+Export the person by inserting the 'export' keyword in front of the 'class' keyword.
+Now person.ts exposes a person class ready to be imported by some other file.
+
+When in app.ts, type Person and autocompletion should kick in and do the importing for you.
+```
+_If your IDE does not support this feature, you have to manually import it. The import paths are relative to the
+location of the file that is doing the import._
+```javascript
+import {Person} from './models/person'; // './' is very important
 ```
 
+####Default import/export (0..1 per file)
+Default exports will be imported by a keyword without brackets (since there can only be 1 default, the assigned name doesn't matter).
 If everything compiles, try changing the Person export by inserting 'default' in between the 'export' and 'class'.
-There can only be 1 default export per file (+ 0...n normal exports). Default exports will be imported by a keyword
-without brackets (since there can only be 1 default, the assigned name doesn't matter).
 ```javascript
 import Person from './models/person'; //<- Works
 import RandomName from './models/person'; //<- Works
