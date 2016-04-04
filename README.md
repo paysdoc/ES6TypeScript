@@ -62,20 +62,22 @@ class Example {
     //...
 }
 ```
+
+```
 Create a new directory called 'models' inside the /app/src/ directory and fill it with a person.ts file.
 Create a Person class inside the person.ts file. A person of this workshop has:
 - firstName
 - lastName
 - id
-
-This person file WILL be transpiled to js by Gulp but WILL NOT be included (yet) inside the application.
-
+```
+_This person file WILL be transpiled to js by Gulp, but WILL NOT be included (yet) in the application._
 
 ###Assignment 2 Importing/Exporting
-Remember how app.ts is the only file loaded in the browser so far? Now we want to include our person too.
-Export the person by inserting the 'export' keyword in front of the 'class' keyword. Now person.ts exposes 
-a person class to the outside world.
-
+The only file imported by System.js so far is app.ts. To include the new Person class, we have to expose it to the outside world
+```
+Export the person by inserting the 'export' keyword in front of the 'class' keyword. Now person.ts exposes a person class ready to be
+imported by some other file.
+```
 Inside our app.ts we can instantiate a new Person (var person = new Person()). Just type Person and you're IDE should recognize it and 
 propose to import it. 
 
