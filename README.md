@@ -28,7 +28,7 @@ Contains all libs and source files compiled and ready for use. (Will be deleted 
 
 ##Assignments setup
 ###Assignment 1 Gulp
-Inside the gulpfile.js is a 'ts-compile' task that takes care of the transpilation to JS.
+Take a look inside the gulpfile.js file at the 'ts-compile' task that takes care of the transpilation process.
 This tasks calls the 'gulp-typescript' plugin with the source files and tells the plugin to transpile
 the code with the options specified in tsconfig.
 
@@ -64,6 +64,16 @@ Create a Person class inside the person.ts file. A person of this workshop has a
 
 This person file WILL be transpiled to js by Gulp but WILL NOT be included (yet) inside the application.
 
+```javascript
+class ClassName {
+    var1;
+    var2;
+    constructor() {
+    
+    }
+}
+```
+
 ###Assignment 2 Importing/Exporting
 Remember how app.ts is the only file loaded in the browser so far? Now we want to include our person too.
 Export the person by inserting the 'export' keyword in front of the 'class' keyword. Now person.ts exposes 
@@ -97,4 +107,24 @@ Change the target and module attributes and reset the gulp task to see the diffe
 
 Even tho the outputs look different, System.js is clever enough to interpret all of them.
 
+###Assignment 4 Playing with new ES6 Features.
+####Constructors
+Append the Person's constructor with 2 parameters, firstName and lastName.
+Let the constructor set its own values. Create a few persons with different names and console.log them.
 
+####Class functions + custom interpolation.
+Let's create a toString function inside the person class that returns its first and last name.
+```javascript
+class ClassName {
+    fn() {
+        return '';
+    }
+}
+```
+
+In stead of appending some strings to each other, we want to use the new interpolation that uses ` `.
+Inside these `` we can put strings and values.
+```javascript
+var exampleText = 'someText';
+var interpolation = `sd asd a`;
+```
