@@ -58,7 +58,7 @@ browser which means we're done with setting up System.js.
 ###Assignment 1 Classes
 ```javascript
 class Example {
-    value;
+    value = 123;
     //...
 }
 ```
@@ -76,7 +76,7 @@ _This person file WILL be transpiled by gulp-typescript to js, but WILL NOT be i
 ####Regular import/export (0..n per file)
 ```javascript
 export class Example {
-    value = 123;
+    value;
     //...
 }
 ```
@@ -337,7 +337,7 @@ abstract class if it has a constructor, this is probably a bug?).
 abstract class Example {
     abstract foo();
 }
-class NotAbstractClass extends Example { //error Must implement a foo function.
+class NotAbstractClass extends Example { //error must implement a foo function.
     
 }
 ```
