@@ -65,6 +65,7 @@ Create a Person class inside the person.ts file. A person of this workshop has a
 This person file WILL be transpiled to js by Gulp but WILL NOT be included (yet) inside the application.
 
 ```javascript
+// class example
 class ClassName {
     var1;
     var2;
@@ -115,6 +116,7 @@ Let the constructor set its own values. Create a few persons with different name
 ####Class functions + custom interpolation.
 Let's create a toString function inside the person class that returns its first and last name.
 ```javascript
+//class funtion with return example
 class ClassName {
     fn() {
         return '';
@@ -134,6 +136,7 @@ Give the person a greet function that expects a name and will console 'Hello ${n
 Imagine the person will say 'Hello nobody!' if we don't give it a name.
 In stead of doing an undefined check we simply give the name param a default value of 'nobody'.
 ```javascript
+//default param example
     (param = 1) {
         console.log(param) //1 if it's called without parameter.
     }
