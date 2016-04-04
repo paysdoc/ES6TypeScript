@@ -16,21 +16,7 @@
 ////console.log(example.getRandomNumber());
 ////example.getRandomNumber();
 //
-//var role = 'user';
-//function Secured(roleWithPermission:string = '*') {
-//    return (target: Object, propertyKey: string, descriptor: TypedPropertyDescriptor<any>) => {
-//        var originalMethod = descriptor.value;
-//        descriptor.value = function (...args:any[]) {
-//            console.log('instance', args[0].role);
-//            //console.log("The method args are: " + JSON.stringify(args));
-//            if(roleWithPermission != '*' && roleWithPermission != role) return;
-//            var result = originalMethod.apply(this, args);
-//            //console.log("The return value is: " + result);
-//            return result;
-//        };
-//        return descriptor;
-//    };
-//}
+
 //
 //function logParam(target: any, propertyKey: string | symbol, parameterIndex: number) {
 //    console.log(target[propertyKey]);         // MyClass prototype
@@ -140,10 +126,10 @@ class Client extends Person {
         return '';
     }
 }
-console.log(new Client('Jan'));
-//console.log(new Person());
-console.log(new Client('Karel'));
-console.log(new Client('Kees'));
+//console.log(new Client('Jan'));
+////console.log(new Person());
+//console.log(new Client('Karel'));
+//console.log(new Client('Kees'));
 
 class Example {
     text:string;
@@ -151,3 +137,46 @@ class Example {
         return 1;
     }
 }
+
+var role = 'user';
+function Secured(roleWithPermission:string = '*') {
+    return (target: Object, propertyKey: string, descriptor: TypedPropertyDescriptor<any>) => {
+        var originalMethod = descriptor.value;
+        descriptor.value = function (...args:any[]) {
+            let className = target.constructor.name;
+            if(roleWithPermission != '*' && roleWithPermission != role) {
+                console.error(`Permission '${role}' denied.`);
+                console.error(`${className}.${propertyKey} only accepts '${roleWithPermission}'.`);
+                return;
+            }
+            var result = originalMethod.apply(this, args);
+            return result;
+        };
+        return descriptor;
+    };
+}
+function LogInAndOut (target: Object, propertyKey: string, descriptor: TypedPropertyDescriptor<any>) {
+    let className = target.constructor.name;
+    //methodName == propertyKey;
+    console.debug(`${className}.${propertyKey} is called`);
+
+    var originalMethod = descriptor.value;
+    //override the implementation.
+    descriptor.value = function (...args:any[]) {
+        //before method call
+        console.debug("The method args are: " + JSON.stringify(args));
+        var result = originalMethod.apply(this, args);
+        //after method call
+        console.debug("The return value is: " + result);
+        return result;
+    };
+    return descriptor;
+}
+class Test {
+    @LogInAndOut
+    @Secured('admin')
+    test(hello, world):string {
+        return 'test';
+    }
+}
+new Test().test(1, 2);

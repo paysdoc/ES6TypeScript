@@ -73,7 +73,7 @@ Create a Person class inside the person.ts file with the following variables:
 _This person file WILL be transpiled by gulp-typescript to js, but WILL NOT be included in the browser._
 
 ###Assignment 2 Importing/Exporting
-####Normal import/export (0..n per file)
+####Regular import/export (0..n per file)
 ```javascript
 export class Example {
     value;
@@ -86,7 +86,7 @@ Before person.ts can be imported it has to expose something to the outside world
 Export the person by inserting the 'export' keyword in front of the 'class' keyword.
 Now person.ts exposes a person class ready to be imported by some other file.
 
-When in app.ts, type Person and autocompletion should kick in and do the importing for you.
+When in app.ts, type Person and let autocompletion do the importing for you.
 ```
 _If your IDE does not support this feature, you have to manually import it. The import paths are relative to the
 location of the file that is doing the import._
@@ -95,8 +95,13 @@ import {Person} from './models/person'; // './' is very important
 ```
 
 ####Default import/export (0..1 per file)
-Default exports will be imported by a keyword without brackets (since there can only be 1 default, the assigned name doesn't matter).
-If everything compiles, try changing the Person export by inserting 'default' in between the 'export' and 'class'.
+```javascript
+export default class Example {
+    value;
+    //...
+}
+```
+Default exports are imported differently than regular imports.
 ```javascript
 import Person from './models/person'; //<- Works
 import RandomName from './models/person'; //<- Works
@@ -338,7 +343,25 @@ The Typescript compiler should complain about the Client class because it now mu
 
 ###Method decorators
 <<Decorate a method so it only executes when certain conditions are met @Secured('admin') equivalent>>
+```javascript
+function LogInAndOut (target: Object, propertyKey: string, descriptor: TypedPropertyDescriptor<any>) {
+    let className = target.constructor.name;
+    //methodName == propertyKey;
+    console.debug(`${className}.${propertyKey} is called`);
 
+    var originalMethod = descriptor.value;
+    //override the implementation.
+    descriptor.value = function (...args:any[]) {
+        //before method call
+        console.debug("The method args are: " + JSON.stringify(args));
+        var result = originalMethod.apply(this, args);
+        //after method call
+        console.debug("The return value is: " + result);
+        return result;
+    };
+    return descriptor;
+}
+```
 ###Param decorators
 <<Decorate a param so it prints>>
 
