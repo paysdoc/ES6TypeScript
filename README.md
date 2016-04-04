@@ -20,9 +20,6 @@ Options for the typescript compiler.
 /app
 Contains all libs and source files.
 
-/libs
-For this part only System.js is required.
-
 /dist (distribution) dir
 Contains all libs and source files compiled and ready for use. (Will be deleted every time gulp builds!!!)
 
