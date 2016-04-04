@@ -113,7 +113,7 @@ Let the constructor set its own values. Create a few persons with different name
 class Example {
     foo;
     constructor(foo){
-        this.foo = foo;
+        this.foo = foo;//inside classes instance variables are accessed through 'this'.
     }
 }
 ```
@@ -129,15 +129,15 @@ class Example {
 }
 ```
 
-In stead of appending some strings to each other, we want to use the new interpolation that uses ` `.
-Inside these `` we can put strings and values (inside a class, you probably want to call its own variable by using 'this').
+In stead of appending some strings to each other, we want to use the new interpolation that uses ``.
+Inside these `` we can put strings and values.
 
 ```javascript
 var exampleText = 'someText';
 var interpolation = `exampleText = ${exampleText}`;
 ```
 
-####Default and optional params.
+####Default params.
 Give the person a greet function that expects a name and will console 'Hello ${name}!'.
 Imagine the person will say 'Hello nobody!' if we don't give it a name.
 In stead of doing an undefined check we simply give the name param a default value of 'nobody'.
@@ -147,6 +147,8 @@ In stead of doing an undefined check we simply give the name param a default val
         console.log(param) //1 if it's called without parameter.
     }
 ```
+
+Sometimes we don't necessarily expect a parameter. Now we can use the optional parameter.
 
 ####Rest param.
 Create a greetMany function that will iterate through a list of people and greet them by name.
@@ -190,4 +192,21 @@ wontChange = 'OtherTest'; //error
 const willChange = {content: 'Test'};
 willChange.content = 'OtherTest'; //ok
 willChange = {content: 'OtherTest'}; //error
+```
+
+###Assignment 5
+Create a new file called client.ts inside the models directory. Inside the file create a Client class that extends from Person.
+For now the client also expects a firstName and lastName, but in stead of setting the values it'll pass it to the Person
+through a super call. 
+```javascript
+class A {
+    constructor() {
+        this.id = 1;
+    }
+}
+class B extends A {
+    constructor() {
+        super();
+    }
+}
 ```

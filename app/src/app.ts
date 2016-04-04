@@ -1,13 +1,13 @@
 //alert('App.ts is transpiled and executed!');
-
-function testRestParam(...params) {
-    return params.length;
-}
-testRestParam(1); //1
-testRestParam(1, 2, 3, 4); //4
-console.log(testRestParam(1));
-
-console.log(testRestParam(1, 2, 3, 4));
+//
+//function testRestParam(...params) {
+//    return params.length;
+//}
+//testRestParam(1); //1
+//testRestParam(1, 2, 3, 4); //4
+//console.log(testRestParam(1));
+//
+//console.log(testRestParam(1, 2, 3, 4));
 //import Client from "./models/client";
 //import ES5Example = MyLib.ES5Example;
 //
@@ -114,8 +114,14 @@ export class Person {
         this.id = idGen.next().value;
     }
 }
+class Client extends Person {
+    constructor() {
+        super();
+        console.log(this.id);
+    }
+}
+console.log(new Client());
 console.log(new Person());
-console.log(new Person());
-console.log(new Person());
-console.log(new Person());
+console.log(new Client());
+console.log(new Client());
 
