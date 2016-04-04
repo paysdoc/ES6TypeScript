@@ -76,7 +76,6 @@ _This person file WILL be transpiled by gulp-typescript to js, but WILL NOT be i
 ####Regular import/export (0..n per file)
 ```javascript
 export class Example {
-    value;
     //...
 }
 ```
@@ -98,7 +97,6 @@ import {Person as P} from './models/person'; // also possible
 ####Default import/export (0..1 per file)
 ```javascript
 export default class Example {
-    value;
     //...
 }
 ```
