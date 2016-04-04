@@ -123,8 +123,8 @@ class ClassName {
 ```
 
 In stead of appending some strings to each other, we want to use the new interpolation that uses ` `.
-Inside these `` we can put strings and values.
+Inside these `` we can put strings and values (inside a class you probably want to call its own variable by using 'this').
 ```javascript
 var exampleText = 'someText';
-var interpolation = `sd asd a`;
+var interpolation = `exampleText = ${exampleText}`;
 ```
