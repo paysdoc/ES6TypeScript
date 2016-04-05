@@ -1,1 +1,1 @@
-alert('App.ts is transpiled and executed!');
+alert('App.ts is transpiled and executed.');
