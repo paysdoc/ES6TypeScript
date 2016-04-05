@@ -110,6 +110,7 @@ export default class Example {
 ```
 Default exports are imported differently than regular imports. Since there is only one default export per file 
 (if you define multiple, only the last will exported) the name doesn't matter.
+
 ```javascript
 import Example from './example'; //<- Works
 import RandomName from './example'; //<- Works
@@ -117,14 +118,24 @@ import {default as RandomName} from './example'; //<- Works
 import RandomName, {Other} from './example'; //<- Works (let's assume Other is an exported class)
 ```
 
+```
+Think about using default keywords from now on. The person.ts file exports a Person class, this can be
+transfered into a default export.
+```
+
 ###Assignment 3 Playing with transpiling.
 Now that we have 2 interacting files, we're going to have a look at the different possible outputs of the transpiling process.
 process. 
 ```
 Take a look at tsconfig's 'target' and 'module' attributes and check the dist folder javascript files content. 
-Change the target and/or module attributes and reset the gulp task to see the different ways of transpiling.
-- target: es5 || es6 (output js version)
-- module: commonjs || amd || system 
+Change the target and/or module attributes and execute the 'ts-compile' task and check the different JS output.
+target: (output js version)
+- es5
+- es6 
+module: 
+- commonjs
+- amd
+- system 
 ```
 
 ###Assignment 4 Playing with new ES6 Features.
