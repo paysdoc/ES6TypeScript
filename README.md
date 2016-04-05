@@ -469,8 +469,9 @@ class ExampleChild extends Example {
 Protected variables/methods are private to the outside world, but can be called/modified by the instance itself or its subclasses.
 So imagine that all people can ask questions, meaning only they can take initiative to ask something. A protected method 'ask' would be
 the solution. Person will be able to ask a question just like every subclass (Client in this case).
-Implement a protected 'ask' method that consoles a question and call it (from within the instance).
-
+```
+Implement a protected 'ask' method that consoles a question and call it (from within and outside the class).
+```
 #### Set access modifiers inside the constructor "shortcut"
 ```javascript
 class Example {
@@ -483,10 +484,7 @@ class Example {
 //same as
 
 class Example {
-    public foo;
-    constructor(public foo) {
-        this.foo = foo;
-    }
+    constructor(public foo) {}
 }
 ```
 
