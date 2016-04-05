@@ -388,8 +388,6 @@ class Example {
     @MyDecorator
     foo() { }
 }
-@MyDecorator
-//...
 
 function MyDecorator (value:string) {
     return (target: Object, propertyKey: string, descriptor: TypedPropertyDescriptor<any>) { }
