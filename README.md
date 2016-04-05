@@ -250,7 +250,7 @@ if(conditon) {
 if(condition) {
     let foo = 1;
 }
-//var in JSEngine 
+//let in JSEngine 
 if(conditon) {
     let foo = 1;
 }
