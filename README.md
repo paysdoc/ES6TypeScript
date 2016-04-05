@@ -335,6 +335,7 @@ class ExampleChild extends Example {
     }
 }
 ```
+
 Protected variables/methods are private to the outside world, but can be called/modified by the instance itself or its subclasses.
 So imagine that all people can ask questions, meaning only they can take initiative to ask something. A protected method 'ask' would be
 the solution. Person will be able to ask a question just like every subclass (Client in this case).
