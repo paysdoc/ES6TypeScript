@@ -167,7 +167,7 @@ var interpolation = `exampleText = ${exampleText}`;
 
 ####Default params.
 ```javascript
-function EXAMPLE(param = 1) {
+function Example(param = 1) {
     console.log(param) //1 if it's called without parameter.
 }
 ```
@@ -197,10 +197,10 @@ Instead of expecting a list as param, we want to implement the rest param so we 
 ```javascript
 function OuterScope () {
     this.value = 123;
-    var local = function () {
+    var innerScope = function () {
         console.log(this.value);
     };
-    local();//undefined
+    innerScope();//undefined
 }
 new OuterScope();
 
@@ -209,20 +209,20 @@ new OuterScope();
 function OuterScope () {
     this.value = 123;
     var self = this;
-    var local = function () {
+    var innerScope = function () {
         console.log(self.value);
     };
-    local();//123
+    innerScope();//123
 }
 new OuterScope();
 
 //solution ES6
 function OuterScope () {
     this.value = 123;
-    var local = () => {
+    var innerScope = () => {
         console.log(this.value);
     };
-    local();//123
+    innerScope();//123
 }
 new OuterScope();
 ```
