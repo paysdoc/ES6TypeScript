@@ -29,6 +29,7 @@ Contains all libs and source files compiled and ready for use. (Will be deleted 
 Take a look inside the gulpfile.js file at the 'ts-compile' task that takes care of the transpilation process.
 This tasks defines the sources files, pipes it through 'gulp-typescript' and places inside the distribution folder.
 ```
+
 ###Assignment 2 System.js
 Currently nothing is happening in our project. Inside the app.ts file is an alert saying everything worked out.
 To get this alert to show up we have to tell System.js to start importing the transpiled files. We only have to
