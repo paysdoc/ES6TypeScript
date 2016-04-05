@@ -188,12 +188,12 @@ A completely new feature of ES6 is the generator method. Basically it's a method
 state. Create an id generator inside person.ts (above the Person class) and let it set the id of the person in its constructor.
 Notice the * right after the method keyword, no this is not a typo.
 ```javascript
-function* idMaker(){
+function* IdGenerator(){
     var index = 0;
     while(true)
         yield index++;
 }
-var idGen = idMaker();
+var idGen = IdGenerator();
 console.log(idGen.next().value); //0
 console.log(idGen.next().value); //1
 console.log(idGen.next().value); //2
@@ -346,13 +346,67 @@ keyword in front of it. The Typescript compiler should complain about the Client
 having a greet method.
 ```
 ##Assignment 4 interfaces
+Interfaces serve multiple purposes in Typescript. As the Java equivalent of interfaces and 
+(as you'll see in the next assignment) as a type.
 
-##Assignment 5 Decorators
+```
+Create a Dog class. We don't really need to implement it, we just need a different type of class.
+When comparing a dog and a client, we can conlcude that they both are able to walk. This resemblence
+is nog big enough to create a common superclass and can be solved by an interfcace. Create an interface
+called IWalk that implements a walk():void method. Let the Client and Dog implement the IWalk interface.
+Now it's possible to create a method that expects something that can walk and accepts a Client and a Dog
+even though they are different classes.
+```
+
+##Assignment 5 Custom types
+```
+class Example {
+    foo(item: {index:number, name: string}):void {}
+}
+```
+While working in JavaScript you don't always want to make a class for passing some set of variables to a method.
+In Typescript it's possible to easily overcome this issue by specifying constructed parameter types inline.
+```
+Create a method with inline variaties of types.
+```
+Nobody likes duplicated code, so when you notice that a custom inline type is being reused, a simple solution would be
+defining an interface with those properties. This interface will not necessarily be implemented by a class because it 
+serves as a type.
+```
+Replace the previously created inline custom type with an interface type.
+```
+
+##Assignment 6 Decorators
+Decorators are like annotations and can be used to add meta data or behaviour to classes, methods, params and variables.
 ###Class decorators
 <<Decorate a class so it gets registered with extra data Angular 2's @Component equivalent>>
 
 ###Method decorators
-<<Decorate a method so it only executes when certain conditions are met @Secured('admin') equivalent>>
+```javascript
+function MyDecorator (target: Object, propertyKey: string, descriptor: TypedPropertyDescriptor<any>) { }
+class Example {
+    @MyDecorator
+    foo() { }
+}
+@MyDecorator
+//...
+
+function MyDecorator (value:string) {
+    return (target: Object, propertyKey: string, descriptor: TypedPropertyDescriptor<any>) { }
+}
+class Example {
+    @MyDecorator('someValue')
+    foo() { }
+}
+```
+Method decorators can for example intercept behaviour and register calls.
+
+```
+To find out how a method decorator works, copy the following code snippet and decorate a
+method of the Client. Call the decorated method, check the console and browse through the decorator 
+to get an idea of what's happening.
+```
+
 ```javascript
 function LogInAndOut (target: Object, propertyKey: string, descriptor: TypedPropertyDescriptor<any>) {
     let className = target.constructor.name;
@@ -373,17 +427,6 @@ function LogInAndOut (target: Object, propertyKey: string, descriptor: TypedProp
 ```
 ###Param decorators
 <<Decorate a param so it prints>>
-
-##Assignment 6 Custom types
-
-While working in JavaScript you don't always want to make a class for passing some set of variables to a method.
-In Typescript it's possible to easily overcome this issue by specifying constructed parameter types inline.
-var iets: new Array<Client> = [];
-var paramObjToServer = {
-    _id: number,
-    text: string,
-    blabla: string
-}
 
 ##Assignment 7 Existing JavaScript (declaration files .d.ts)
 

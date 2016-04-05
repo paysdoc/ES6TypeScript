@@ -39,16 +39,7 @@
 //
 //const controllers = [];
 //
-//function Controller(param: any) {
-//    return function(target: Function) {
-//        controllers.push(target.name);
-//    }
-//}
-//@Controller({
-//    name: 'HomeCtrl'
-//})
-//class HomeCtrl {
-//}
+
 //
 //console.log(controllers);
 //
@@ -95,37 +86,7 @@ var idGen = idMaker();
 interface IAuth {
     role:string;
 }
-abstract class Person {
-    firstName;
-    lastName;
-    private _id = idGen.next().value;
-    protected askQueston ():void {
-        console.log(this.firstName + ': Question?');
-    }
 
-    //constructor() {
-    //    this._id = idGen.next().value;
-    //}
-    get id() {
-        return this._id;
-    }
-    private foo() {
-
-    }
-    abstract greet():string;
-}
-
-class Client extends Person {
-    constructor(firstName:string) {
-        super();
-        this.firstName = firstName;
-        console.log(this.id);
-        this.askQueston();
-    }
-    greet() {
-        return '';
-    }
-}
 //console.log(new Client('Jan'));
 ////console.log(new Person());
 //console.log(new Client('Karel'));
@@ -138,23 +99,7 @@ class Example {
     }
 }
 
-var role = 'user';
-function Secured(roleWithPermission:string = '*') {
-    return (target: Object, propertyKey: string, descriptor: TypedPropertyDescriptor<any>) => {
-        var originalMethod = descriptor.value;
-        descriptor.value = function (...args:any[]) {
-            let className = target.constructor.name;
-            if(roleWithPermission != '*' && roleWithPermission != role) {
-                console.error(`Permission '${role}' denied.`);
-                console.error(`${className}.${propertyKey} only accepts '${roleWithPermission}'.`);
-                return;
-            }
-            var result = originalMethod.apply(this, args);
-            return result;
-        };
-        return descriptor;
-    };
-}
+
 function LogInAndOut (target: Object, propertyKey: string, descriptor: TypedPropertyDescriptor<any>) {
     let className = target.constructor.name;
     //methodName == propertyKey;
@@ -174,9 +119,94 @@ function LogInAndOut (target: Object, propertyKey: string, descriptor: TypedProp
 }
 class Test {
     @LogInAndOut
-    @Secured('admin')
+    //@Secured('admin')
     test(hello, world):string {
         return 'test';
     }
 }
 new Test().test(1, 2);
+
+var controllers = [];
+
+enum ACCESS_ROLES {
+    ADMIN = 'admin',
+    CLIENT = 'client'
+}
+abstract class Person {
+    firstName;
+    lastName;
+    private _id = idGen.next().value;
+    protected askQueston ():void {
+        //console.log(this.firstName + ': Question?');
+    }
+
+    //constructor() {
+    //    this._id = idGen.next().value;
+    //}
+    get id() {
+        return this._id;
+    }
+    private foo() {
+
+    }
+    abstract greet():string;
+}
+
+
+var myAccessLevel = ACCESS_ROLES.CLIENT;
+interface IAccessLevel {
+    access_level: ACCESS_ROLES;
+}
+function AccessLevel(role:ACCESS_ROLES) {
+    return function (target:Function) {
+        let name = target.name;
+        (<IAccessLevel>target).access_level = role;
+        console.log(`${target.name} gives full permissions to ACCESS_ROLE: ${role}`);
+    }
+}
+function Secured(target: Object, propertyKey: string, descriptor: TypedPropertyDescriptor<any>) {
+    var originalMethod = descriptor.value;
+    descriptor.value = function (...args:any[]) {
+        let className = target.constructor.name;
+        var access_level = (<IAccessLevel>target.constructor).access_level;
+        if(access_level != myAccessLevel) {
+            console.error(`Permission '${myAccessLevel}' denied.`);
+            console.error(`${className}.${propertyKey} only accepts '${access_level}'.`);
+            return;
+        }
+        return originalMethod.apply(this, args);
+    };
+    return descriptor;
+}
+interface IWalk {
+    walk():string;
+}
+@AccessLevel(ACCESS_ROLES.ADMIN)
+class Client extends Person implements IWalk{
+    walk():string {
+        return 'Client walk';
+    }
+    constructor(firstName:string) {
+        super();
+        this.firstName = firstName;
+        //console.log(this.id);
+        //this.askQueston();
+    }
+    @Secured
+    greet() {
+        return '';
+    }
+}
+class Dog implements IWalk {
+    walk():string {
+        return 'Dog walk';
+    }
+}
+var client = new Client('yo');
+var dog = new Dog();
+
+function test(walker:IWalk) {
+    console.log(walker.walk())
+}
+test(dog);
+test(client);
