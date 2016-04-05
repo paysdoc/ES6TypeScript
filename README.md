@@ -288,7 +288,8 @@ A completely new feature of ES6 is the generator method. Basically it's a method
 state. 
 
 ```
-Create an id generator inside person.ts (above the Person class) and let it set the id of the person in its constructor.
+Create an id generator inside person.ts (above the Person class) and let it set the id of the
+person in its constructor.
 ```
 
 ###Assignment 5 Inheritance 
