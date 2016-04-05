@@ -389,7 +389,7 @@ even though they are different classes.
 
 ##Assignment 5 Types
 ###Custom
-```
+```javascript
 class Example {
     foo(item: {index:number, name: string}):void {}
 }
@@ -407,7 +407,7 @@ Replace the previously created inline custom type with an interface type.
 ```
 
 ###Conflicting
-```
+```javascript
 class Example {
     foo(obj:{}) {
         console.log(obj.name);//error
