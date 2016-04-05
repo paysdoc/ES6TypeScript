@@ -499,11 +499,11 @@ abstract class Example {
 }
 new Example() //error
 ```
-Person is a very generic class and term. In applications we never talk about a person, we rather talk about clients, employees and
+Person is a very generic term. In applications we don't talk about a person, we rather talk about clients, employees and
 admins. Those types of people have something in common, they're people. We want to define a person, but never instantiate it 
-because it only serves as a super class to other types of people.
+because it only serves as a super class that shares the properties all types of people have in common.
 ```
-Remove all Person instantiations and make Person abstract by inserting the 'abstract' keyword 
+Remove all Person instances and make Person abstract by inserting the 'abstract' keyword 
 before the 'class' keyword. Don't forget to move the _id generator out of the constructor 
 because abstract classes can't have constructors here. (It is possible to instantiate an 
 abstract class if it has a constructor, this is probably a bug?).

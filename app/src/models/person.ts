@@ -4,16 +4,12 @@ function* IdGenerator() { //Notice the * right after the method keyword, no this
         yield index++;
 }
 let idGen:IterableIterator<number> = IdGenerator();
-export default class Person {
+export default abstract class Person {
 
     private _id:number = idGen.next().value;
     public firstName:string;
     public lastName:string;
 
-    constructor(firstName:string, lastName:string) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-    }
     get id():number {
         return this._id;
     }
