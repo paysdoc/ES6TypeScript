@@ -484,7 +484,9 @@ class Example {
 //same as
 
 class Example {
-    constructor(public foo) {}
+    constructor(public foo) {
+    
+    }
 }
 ```
 
