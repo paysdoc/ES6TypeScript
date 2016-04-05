@@ -249,7 +249,7 @@ Play around with the new arrow function syntax and realize that 'function' will 
 (in most cases, not all).
 ```
 
-####Let and const keyword.
+#### let keyword.
 ```javascript
 function varTest() {
   var x = 31;
@@ -269,11 +269,15 @@ function letTest() {
   console.log(x);  // 31
 }
 ```
-[Mozilla developer network let description](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let#Block_scope_with_let)
+Source: [Mozilla developer network let description](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let#Block_scope_with_let)
 
 "Many common problems in JavaScript are alleviated by using let, so you should use it instead of var whenever possible." - TypeScript
 
-Const is the new JS equivalent to Java's final.
+```
+Replace all 'var' keywords with 'let' and use 'let' from now on.
+```
+
+#### const keyword
 ```javascript
 const wontChange = 'Test';
 wontChange = 'OtherTest'; //error
@@ -283,8 +287,9 @@ willChange.content = 'OtherTest'; //ok
 willChange = {content: 'OtherTest'}; //error
 ```
 
+Const is the new JS equivalent to Java's final.
 ```
-Test the above code samples for yourself. Try to only use let from now on. 
+Implement a constant.
 ```
 
 ####Generators.
@@ -308,7 +313,7 @@ state.
 Create an id generator inside person.ts (above the Person class) and let it set the id of the
 person in its constructor.
 
-Try to make a generator class with a limit/restriction (not a necessity for the code).
+Try to make a generator class with a limit/restriction.
 ```
 
 ###Assignment 5 Inheritance 
