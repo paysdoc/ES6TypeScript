@@ -1,4 +1,4 @@
-# ES6 + Typescript Workshop
+# ES6 + TypeScript Workshop
 ###Quintor
 #####Rachèl Heimbach
 
@@ -19,7 +19,7 @@ In commandline:
 This file compiles and copies all src files to the distribution folder.
 
 ####tsconfig.json
-Options for the typescript compiler.
+Options for the TypeScript compiler.
 
 ####/app/
 Contains all libs and source files.
@@ -31,7 +31,7 @@ Contains all libs and source files compiled and ready for use. (Will be deleted 
 ###Assignment 1 Gulp
 ```
 Take a look inside the gulpfile.js file at the 'ts-compile' task that takes care of the transpilation 
-process. This tasks defines the sources files, pipes it through 'gulp-typescript' and places inside the
+process. This tasks defines the sources files, pipes it through 'gulp-TypeScript' and places inside the
 distribution folder.
 ```
 
@@ -78,7 +78,7 @@ Create a Person class inside the person.ts file with the following variables:
 - lastName
 - id
 ```
-_This person file WILL be transpiled by gulp-typescript to js, but WILL NOT be included in the browser._
+_This person file WILL be transpiled by gulp-TypeScript to js, but WILL NOT be included in the browser._
 
 ###Assignment 2 Importing/Exporting
 ####Regular import/export (0..n per file)
@@ -180,12 +180,11 @@ In stead of doing an undefined check we simply give the name param a default val
 
 ####Rest param.
 ```javascript
-//rest param example
-function restExample(...params) {
+function example(...params) {
     return params.length;
 }
-restExample(1); //1
-restExample(1, 2, 3, 4) //4
+example(1); //1
+example(1, 2, 3, 4) //4
 ```
 
 ```
@@ -258,6 +257,8 @@ if(conditon) {
 
 "let is the new var" - [Is there any reason to use the “var” keyword in ES6?](http://programmers.stackexchange.com/questions/274342/is-there-any-reason-to-use-the-var-keyword-in-es6) 
 
+"Many common problems in JavaScript are alleviated by using let, so you should use it instead of var whenever possible." - Ty
+
 The new 'let' keyword has solved the block scoping issues of var and is recommended for ES6.
 
 Const is the new JS equivalent to Java's final.
@@ -274,11 +275,11 @@ willChange = {content: 'OtherTest'}; //error
 !!For generators the tsconfig.json target MUST be es6 since there is no alternative in es5.
 ```javascript
 function* Example() { //Notice the * right after the method keyword, no this is not a typo.
-    var index = 0;
+    let index = 0;
     while(true)
         yield index++;
 }
-var example = Example();
+let example = Example();
 console.log(example.next().value); //0
 console.log(example.next().value); //1
 console.log(example.next().value); //2
@@ -309,14 +310,14 @@ class B extends A {
 }
 ```
 
-##Assignments Typescript
+##Assignments TypeScript
 IMPORTANT
 From this moment onwards keep track of your nodejs/cmd/terminal where the gulp task is running.
-Typescript errors won't always compile, this means the browser won't be updated as well!
+TypeScript errors won't always compile, this means the browser won't be updated as well!
 
 ###Assignment 1 Basic types
-Take a look at the Person class. Even tho it's located inside a typescript file, we haven't touched any Typescript yet.
-The first thing we can do is adding types to all variables and methods (return types) inside Person, [here](https://www.typescriptlang.org/docs/handbook/basic-types.html) is a link with some basic types.
+Take a look at the Person class. Even tho it's located inside a TypeScript file, we haven't touched any TypeScript yet.
+The first thing we can do is adding types to all variables and methods (return types) inside Person, [here](https://www.Typescriptlang.org/docs/handbook/basic-types.html) is a link with some basic types.
 After this is done, create a new person with a variable and check your IDE's auto completion. Now we know exactly
 what's expected and get compile errors if we put in the wrong values.
 ```javascript
@@ -447,11 +448,11 @@ class NotAbstractClass extends Example { //error must implement a foo function.
 Abstract methods are methods without a body that MUST be implemented by the subclass of the abstract class.
 ```
 Since a Person will never have to greet another person, remove the body and add the 'abstract' 
-keyword in front of it. The Typescript compiler should complain about the Client class for not
+keyword in front of it. The TypeScript compiler should complain about the Client class for not
 having a greet method.
 ```
 ##Assignment 4 interfaces
-Interfaces serve multiple purposes in Typescript. As the Java equivalent of interfaces and 
+Interfaces serve multiple purposes in TypeScript. As the Java equivalent of interfaces and 
 (as you'll see in the next assignment) as a type.
 
 ```
@@ -471,7 +472,7 @@ class Example {
 }
 ```
 While working in JavaScript you don't always want to make a class for passing some set of variables to a method.
-In Typescript it's possible to easily overcome this issue by specifying constructed parameter types inline.
+In TypeScript it's possible to easily overcome this issue by specifying constructed parameter types inline.
 ```
 Create a method with inline variaties of types.
 ```
@@ -491,7 +492,7 @@ class Example {
 }
 new Example().foo({name:'test'});
 ```
-Sometimes you know there's a certain variable available in an object, but Typescript will not let you call it (because of
+Sometimes you know there's a certain variable available in an object, but TypeScript will not let you call it (because of
 a different assigned type). To overcome this you either have to set the correct typ so the error goes away, or you cheat
 and cast the object to a different type. In the end it's still JavaScript so this only affects compiletime. 
 
@@ -579,11 +580,11 @@ function LogInAndOut (target: Object, propertyKey: string, descriptor: TypedProp
     //methodName == propertyKey;
     console.debug(`${className}.${propertyKey} is called`);
 
-    var originalMethod = descriptor.value;
+    let originalMethod = descriptor.value;
     descriptor.value = function (...args:any[]) {
         //before method call
         console.debug("The method args are: " + JSON.stringify(args));
-        var result = originalMethod.apply(this, args);
+        let result = originalMethod.apply(this, args);
         //after method call
         console.debug("The return value is: " + result);
         return result;
@@ -608,7 +609,7 @@ That's why declaration files exist.
 ```
 Copy the following code snippet and past it into a JavaScript file (client.service.js) and add a script tag 
 to the index.html. This file represents a piece of JavaScript that we don't want to rewrite in TypeScript 
-(imagine it's from your library). The JS code is loaded, but your Typescript files will not know of its
+(imagine it's from your library). The JS code is loaded, but your TypeScript files will not know of its
 existence.
 ```
 
@@ -619,7 +620,7 @@ function ClientService() {
         return this.all;
     };
     this.getById = function (id) {
-        for(var i = 0;i < this.all.length; i++) {
+        for(let i = 0;i < this.all.length; i++) {
             if(this.all[i].id == id) {
                 return this.all[i];
             }
@@ -630,7 +631,7 @@ function ClientService() {
         this.all.push(client)
     };
     this.delete = function (id) {
-        for(var i = 0;i < this.all.length; i++) {
+        for(let i = 0;i < this.all.length; i++) {
             if(this.all[i].id == id) {
                 this.all.splice(i, 1);
                 break;
@@ -643,8 +644,8 @@ function ClientService() {
 ```
 Create a ClientService declaration file (client.service.d.ts). Inside this file create an interface that
 contains all values and methods (including proper types) of the JS ClientService. After this is done, we
-have to declare the function so Typescript will know it exists. Now we use external JavaScript code inside
-the Typescript scope.
+have to declare the function so TypeScript will know it exists. Now we use external JavaScript code inside
+the TypeScript scope.
 ```
 
 ```javascript

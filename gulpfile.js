@@ -3,14 +3,15 @@ var gulp = require('gulp'),
     rimraf = require('rimraf'),
     runSequence = require('run-sequence'),
     ts = require('gulp-typescript'),
-    tsProject = ts.createProject('./tsconfig.json');
+    tsProject = ts.createProject('./tsconfig.json'),
+    browserSync = require('browser-sync').create();
 
 // gulp
 gulp.task('default', ['build'], function () {
 });
 // gulp build
 gulp.task('build', ['clean'], function () {
-    runSequence('ts-compile', 'html-copy', 'css-copy', 'js-copy', 'ts-watch');
+    runSequence('ts-compile', 'html-copy', 'css-copy', 'js-copy', 'ts-watch', 'browser-sync');
 });
 // delete dist folder
 gulp.task('clean', function (cb) {
@@ -43,4 +44,16 @@ gulp.task('css-copy', function () {
     gulp.src('app/**/*.css')
         .pipe(watch('app/**/*.css'))
         .pipe(gulp.dest('dist'));
+});
+
+// Static server
+gulp.task('browser-sync', function() {
+    browserSync.init({
+        server: {
+            baseDir: ['dist', 'dist/src']
+        },
+        files: [
+            'dist/**.*'
+        ]
+    });
 });

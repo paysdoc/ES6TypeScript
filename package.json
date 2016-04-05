@@ -1,5 +1,5 @@
 {
-  "name": "angular1typescript",
+  "name": "es6typescript",
   "version": "1.0.0",
   "description": "",
   "main": "gulpfile.js",
@@ -9,15 +9,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Rachnerd/angular1typescript.git"
+    "url": "git+https://github.com/Rachnerd/ES6Typescript.git"
   },
   "author": "Rachnerd",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Rachnerd/angular1typescript/issues"
+    "url": "https://github.com/Rachnerd/ES6Typescript/issues"
   },
-  "homepage": "https://github.com/Rachnerd/angular1typescript#readme",
+  "homepage": "https://github.com/Rachnerd/ES6Typescript#readme",
   "devDependencies": {
+    "browser-sync": "^2.11.2",
     "gulp": "^3.9.1",
     "gulp-typescript": "^2.12.1",
     "gulp-watch": "^4.3.5",
