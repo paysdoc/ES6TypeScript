@@ -88,7 +88,7 @@ interface IAuth {
 }
 
 //console.log(new Client('Jan'));
-////console.log(new Person());
+//console.log(new Person());
 //console.log(new Client('Karel'));
 //console.log(new Client('Kees'));
 
@@ -126,12 +126,12 @@ class Test {
 }
 new Test().test(1, 2);
 
-var controllers = [];
-
-enum ACCESS_ROLES {
-    ADMIN = 'admin',
-    CLIENT = 'client'
-}
+//var controllers = [];
+//
+//enum ACCESS_ROLES {
+//    ADMIN = 'admin',
+//    CLIENT = 'client'
+//}
 abstract class Person {
     firstName;
     lastName;
@@ -153,35 +153,35 @@ abstract class Person {
 }
 
 
-var myAccessLevel = ACCESS_ROLES.CLIENT;
-interface IAccessLevel {
-    access_level: ACCESS_ROLES;
-}
-function AccessLevel(role:ACCESS_ROLES) {
-    return function (target:Function) {
-        let name = target.name;
-        (<IAccessLevel>target).access_level = role;
-        console.log(`${target.name} gives full permissions to ACCESS_ROLE: ${role}`);
-    }
-}
-function Secured(target: Object, propertyKey: string, descriptor: TypedPropertyDescriptor<any>) {
-    var originalMethod = descriptor.value;
-    descriptor.value = function (...args:any[]) {
-        let className = target.constructor.name;
-        var access_level = (<IAccessLevel>target.constructor).access_level;
-        if(access_level != myAccessLevel) {
-            console.error(`Permission '${myAccessLevel}' denied.`);
-            console.error(`${className}.${propertyKey} only accepts '${access_level}'.`);
-            return;
-        }
-        return originalMethod.apply(this, args);
-    };
-    return descriptor;
-}
+//var myAccessLevel = ACCESS_ROLES.CLIENT;
+//interface IAccessLevel {
+//    access_level: ACCESS_ROLES;
+//}
+//function AccessLevel(role:ACCESS_ROLES) {
+//    return function (target:Function) {
+//        let name = target.name;
+//        (<IAccessLevel>target).access_level = role;
+//        console.log(`${target.name} gives full permissions to ACCESS_ROLE: ${role}`);
+//    }
+//}
+//function Secured(target: Object, propertyKey: string, descriptor: TypedPropertyDescriptor<any>) {
+//    var originalMethod = descriptor.value;
+//    descriptor.value = function (...args:any[]) {
+//        let className = target.constructor.name;
+//        var access_level = (<IAccessLevel>target.constructor).access_level;
+//        if(access_level != myAccessLevel) {
+//            console.error(`Permission '${myAccessLevel}' denied.`);
+//            console.error(`${className}.${propertyKey} only accepts '${access_level}'.`);
+//            return;
+//        }
+//        return originalMethod.apply(this, args);
+//    };
+//    return descriptor;
+//}
 interface IWalk {
     walk():string;
 }
-@AccessLevel(ACCESS_ROLES.ADMIN)
+//@AccessLevel(ACCESS_ROLES.ADMIN)
 class Client extends Person implements IWalk{
     walk():string {
         return 'Client walk';
@@ -192,7 +192,7 @@ class Client extends Person implements IWalk{
         //console.log(this.id);
         //this.askQueston();
     }
-    @Secured
+    //@Secured
     greet() {
         return '';
     }
@@ -210,3 +210,14 @@ function test(walker:IWalk) {
 }
 test(dog);
 test(client);
+
+
+var service = new ClientService();
+
+service.add(new Client('Jan'));
+service.add(new Client('Kees'));
+service.add(new Client('Karel'));
+console.log(service.getById(1));
+console.log(service.getAll());
+console.log(service.delete(1));
+console.log(service.getById(2));

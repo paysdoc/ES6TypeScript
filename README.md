@@ -427,6 +427,54 @@ function LogInAndOut (target: Object, propertyKey: string, descriptor: TypedProp
 <<Decorate a param so it prints>>
 
 ##Assignment 7 Existing JavaScript (declaration files .d.ts)
-
 If you have written a gigantic JavaScript library, you really don't want to rewrite the thing in TypeScript.
 That's why declaration files exist.
+```
+Copy the following code snippet and past it into a JavaScript file (client.service.js) and add a script tag 
+to the index.html. This file represents a piece of JavaScript that we don't want to rewrite in TypeScript 
+(imagine it's from your library). The JS code is loaded, but your Typescript files will not know of its
+existence.
+```
+
+```javascript
+function ClientService() {
+    this.all = [];
+    this.getAll = function() {
+        return this.all;
+    };
+    this.getById = function (id) {
+        for(var i = 0;i < this.all.length; i++) {
+            if(this.all[i].id == id) {
+                return this.all[i];
+            }
+        }
+        return null;
+    };
+    this.add = function (client) {
+        this.all.push(client)
+    };
+    this.delete = function (id) {
+        for(var i = 0;i < this.all.length; i++) {
+            if(this.all[i].id == id) {
+                this.all.splice(i, 1);
+                break;
+            }
+        }
+    };
+}
+```
+
+```
+Create a ClientService declaration file (client.service.d.ts). Inside this file create an interface that
+contains all values and methods (including proper types) of the JS ClientService. After this is done, we
+have to declare the function so Typescript will know it exists. Now we can import the type and use external
+JavaScript code inside the Typescript context.
+```
+
+```javascript
+declare function ClientService():void;
+
+// Usually your application should create a reference to the declaration file, but it seems to work
+// without it (Webstorm 11).
+/// <references path="./client.service.d.ts" />
+```
