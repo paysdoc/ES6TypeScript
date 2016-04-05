@@ -467,8 +467,8 @@ function ClientService() {
 ```
 Create a ClientService declaration file (client.service.d.ts). Inside this file create an interface that
 contains all values and methods (including proper types) of the JS ClientService. After this is done, we
-have to declare the function so Typescript will know it exists. Now we can import the type and use external
-JavaScript code inside the Typescript context.
+have to declare the function so Typescript will know it exists. Now we use external JavaScript code inside
+the Typescript scope.
 ```
 
 ```javascript
