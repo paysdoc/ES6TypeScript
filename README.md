@@ -172,8 +172,6 @@ In stead of doing an undefined check we simply give the name param a default val
     }
 ```
 
-Sometimes we don't necessarily expect a parameter. Now we can use the optional parameter.
-
 ####Rest param.
 Create a greetMany method that will iterate through a list of people and greet them by name.
 Instead of expecting a list as param, we want to implement the rest param.
@@ -286,6 +284,13 @@ class Example {
 let example = new Example();
 example.foo //error
 example.foo = 'something'; //error
+
+class ExampleChild extends Example {
+    constructor() {
+        super();
+        this.foo; //error
+    }
+}
 ```
 
 In Java it's considered a good practice to make every single variable private and accessible through getters and setters.
@@ -294,12 +299,16 @@ In JavaScript this is also possible.
 class Example {
     private _foo; //The underscore is there to prevent namecollision with the get/set method name.
     get foo() {
-        return _foo;
+        return this._foo;
     }
     set foo(foo) {
         this._foo = foo;
     }
 }
+let example = new Example();
+example.foo //ok
+example.foo = 'something'; //ok
+example._foo //error
 ```
 
 ```
@@ -311,7 +320,21 @@ Print the id of an instantiated Person and try to set its id.
 ```
 
 ####protected
+```javascript
+class Example {
+    protected foo:string;
+}
+let example = new Example();
+example.foo //error
+example.foo = 'something'; //error
 
+class ExampleChild extends Example {
+    constructor() {
+        super();
+        this.foo; //ok
+    }
+}
+```
 Protected variables/methods are private to the outside world, but can be called/modified by the instance itself or its subclasses.
 So imagine that all people can ask questions, meaning only they can take initiative to ask something. A protected method 'ask' would be
 the solution. Person will be able to ask a question just like every subclass (Client in this case).
