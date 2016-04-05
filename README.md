@@ -149,12 +149,12 @@ class Example {
         this.foo = foo;
     }
 }
-let example = new Example('value');
+var example = new Example('value');
 ```
 
 ```
 Append the Person's constructor with 2 parameters, firstName and lastName.
-Let the constructor set its own values. Create a few persons (in app.ts) with different names and log them.
+var the constructor set its own values. Create a few persons (in app.ts) with different names and log them.
 ```
 
 ####Class methods + custom interpolation.
@@ -165,7 +165,7 @@ class Example {
         return 'example';
     }
 }
-let example = new Example('value');
+var example = new Example('value');
 example.foo();
 ```
 
@@ -251,29 +251,25 @@ Play around with the new arrow function syntax and realize that 'function' will 
 
 ####Let and const keyword.
 ```javascript
-//var in IDE
-if(condition) {
-    var foo = 1;
-}
-//var in JSEngine 
-var foo;
-if(conditon) {
-    foo = 1;
-}else { 
-    //Technically foo is available in the else block.
+function varTest() {
+  var x = 31;
+  if (true) {
+    var x = 71;  // same variable!
+    console.log(x);  // 71
+  }
+  console.log(x);  // 71
 }
 
-//let in IDE
-if(condition) {
-    let foo = 1;
-}
-//let in JSEngine 
-if(conditon) {
-    let foo = 1;
+function letTest() {
+  let x = 31;
+  if (true) {
+    let x = 71;  // different variable
+    console.log(x);  // 71
+  }
+  console.log(x);  // 31
 }
 ```
-
-"let is the new var" - [Is there any reason to use the “var” keyword in ES6?](http://programmers.stackexchange.com/questions/274342/is-there-any-reason-to-use-the-var-keyword-in-es6) 
+[Mozilla developer network let description](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let#Block_scope_with_let)
 
 "Many common problems in JavaScript are alleviated by using let, so you should use it instead of var whenever possible." - TypeScript
 
