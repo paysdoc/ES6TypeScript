@@ -12,3 +12,11 @@ let person4 = new Person('3', 'last');
 
 console.log(person2);
 person1.greetManyPeople(person2, person3, person4);
+
+
+class Example {
+    constructor(public foo) {
+        //this.foo = foo;
+    }
+}
+console.log(new Example('foo'));

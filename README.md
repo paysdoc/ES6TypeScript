@@ -7,7 +7,7 @@ Clone repo and execute the following command:
 - npm install
 
 ##Run
-In Webstorm right click gulpfile and show tasks.
+In Webstorm right click gulpfile.js -> Show Gulp Tasks.
 
 or 
 
@@ -154,7 +154,7 @@ let example = new Example('value');
 
 ```
 Append the Person's constructor with 2 parameters, firstName and lastName.
-Let the constructor set its own values. Create a few persons with different names and log them.
+Let the constructor set its own values. Create a few persons (in app.ts) with different names and log them.
 ```
 
 ####Class methods + custom interpolation.
@@ -201,11 +201,11 @@ example(1, 2, 3, 4) //4
 ```
 
 ```
-Create a greetMany method that will iterate through a list of people and greet them by name.
-Instead of expecting a list as param, we want to implement the rest param so we can chain parameters.
+Create a greetManyPeople method that will iterate through a list of people and greet them by name.
+Instead of expecting a list as param, we implement the rest param so we can chain parameters.
 ```
 
-####Arrow functions + lexical this
+####Arrow functions (lambda's) + lexical this
 ```javascript
 //problem ES5
 function OuterScope () {
@@ -244,6 +244,11 @@ functions as opposed to functions that create a new scope. This is very handy fo
 all the time. Be aware that sometimes it is necessary to use a normal function so the 'this' does refer to the other scope
 (think about using this inside an onload function of an image, 'this' should refer to the loading image, not the parent scope)
 
+```
+Play around with the new arrow function syntax and realize that 'function' will be redundend soon
+(in most cases, not all).
+```
+
 ####Let and const keyword.
 ```javascript
 //var in IDE
@@ -270,9 +275,7 @@ if(conditon) {
 
 "let is the new var" - [Is there any reason to use the “var” keyword in ES6?](http://programmers.stackexchange.com/questions/274342/is-there-any-reason-to-use-the-var-keyword-in-es6) 
 
-"Many common problems in JavaScript are alleviated by using let, so you should use it instead of var whenever possible." - Ty
-
-The new 'let' keyword has solved the block scoping issues of var and is recommended for ES6.
+"Many common problems in JavaScript are alleviated by using let, so you should use it instead of var whenever possible." - TypeScript
 
 Const is the new JS equivalent to Java's final.
 ```javascript
@@ -282,6 +285,10 @@ wontChange = 'OtherTest'; //error
 const willChange = {content: 'Test'};
 willChange.content = 'OtherTest'; //ok
 willChange = {content: 'OtherTest'}; //error
+```
+
+```
+Test the above code samples for yourself. Try to only use let from now on. 
 ```
 
 ####Generators.
@@ -304,12 +311,11 @@ state.
 ```
 Create an id generator inside person.ts (above the Person class) and let it set the id of the
 person in its constructor.
+
+Try to make a generator class with a limit/restriction (not a necessity for the code).
 ```
 
 ###Assignment 5 Inheritance 
-Create a new file called client.ts inside the models directory. Inside the file create a Client class that extends from Person.
-For now the client also expects a firstName and lastName, but in stead of setting the values it'll pass it to the Person
-through a super call. 
 ```javascript
 class A {
     constructor() {
@@ -322,6 +328,10 @@ class B extends A {
     }
 }
 ```
+
+Create a new file called client.ts inside the models directory. Inside the file create a Client class that extends from Person.
+For now the client also expects a firstName and lastName, but in stead of setting the values it'll pass it to the Person
+through a super call. 
 
 ##Assignments TypeScript
 IMPORTANT
@@ -431,6 +441,26 @@ Protected variables/methods are private to the outside world, but can be called/
 So imagine that all people can ask questions, meaning only they can take initiative to ask something. A protected method 'ask' would be
 the solution. Person will be able to ask a question just like every subclass (Client in this case).
 Implement a protected 'ask' method that consoles a question and call it (from within the instance).
+
+#### Set access modifiers inside the constructor "shortcut"
+```javascript
+class Example {
+    public foo;
+    constructor(foo) {
+        this.foo = foo;
+    }
+}
+
+//same as
+
+class Example {
+    public foo;
+    constructor(public foo) {
+        this.foo = foo;
+    }
+}
+```
+
 
 ##Assignment 3 Abstract
 ###classes
