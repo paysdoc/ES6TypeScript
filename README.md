@@ -490,7 +490,6 @@ class Example {
 }
 ```
 
-
 ##Assignment 3 Abstract
 ###classes
 ```javascript
@@ -521,7 +520,10 @@ Abstract methods are methods without a body that MUST be implemented by the subc
 ```
 Since a Person will never have to greet another person, remove the body and add the 'abstract' 
 keyword in front of it. The TypeScript compiler should complain about the Client class for not
-having a greet method.
+having a greet method. 
+
+Now we force every subclass of Person to implement the greet method. Implement the greet function
+in Client with something client specific.
 ```
 ##Assignment 4 interfaces
 Interfaces serve multiple purposes in TypeScript. As the Java equivalent of interfaces and 
