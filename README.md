@@ -196,7 +196,6 @@ Instead of expecting a list as param, we want to implement the rest param so we 
 ####Arrow functions + lexical this
 ```javascript
 //problem ES5
-
 function OuterScope () {
     this.value = 123;
     var innerScope = function () {
@@ -207,7 +206,6 @@ function OuterScope () {
 new OuterScope();
 
 //solution ES5
-
 function OuterScope () {
     this.value = 123;
     var self = this;
@@ -219,7 +217,6 @@ function OuterScope () {
 new OuterScope();
 
 //solution ES6
-
 function OuterScope () {
     this.value = 123;
     var innerScope = () => {
