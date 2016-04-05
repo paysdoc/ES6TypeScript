@@ -9,6 +9,7 @@ Clone repo and execute the following command:
 ## Tools
 ### Gulp
 Gulp provides this project with browser-sync for faster development, and makes sure everything in the src map ends up in the dist folder.
+### Tasks
 ###### gulp serve
 Compiles TypeScript, copies all src files to dist, watches for every file change and starts browser-sync
 
@@ -23,12 +24,11 @@ In Webstorm: right click gulpfile.js -> Show Gulp Tasks
 
 ###### Terminal/nodejs/cmd
 If you have gulp installed globally just use: 'gulp <task>'.
-If you don't have gulp installed you can use npm: 'npm run gulp' || 'npm run gulp-no-ts'
+If you don't have gulp installed you can use npm: 'npm run gulp' || 'npm run gulp-no-ts'.
+
+_If you're having difficulties with gulp you can let your IDE compile the files and serve the app folder in localhost._
 
 ##Content
-*gulpfile.js* 
-This file compiles and copies all src files to the distribution folder.
-
 #####tsconfig.json
 Options for the TypeScript compiler.
 
