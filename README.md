@@ -129,9 +129,11 @@ process.
 ```
 Take a look at tsconfig's 'target' and 'module' attributes and check the dist folder javascript files content. 
 Change the target and/or module attributes and execute the 'ts-compile' task and check the different JS output.
+
 target: (output js version)
 - es5
 - es6 
+
 module: 
 - commonjs
 - amd
