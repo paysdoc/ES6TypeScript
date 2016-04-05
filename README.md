@@ -1,31 +1,45 @@
 # ES6 + TypeScript Workshop
 ###Quintor
 #####Rachèl Heimbach
+This workshop serves as an introduction to the new ES6 features and TypeScript.
+
+##Content
+#####tsconfig.json
+Options for the TypeScript compiler.
+
+#####/app/
+Contains all libs and source files.
+
+#####/dist/ (distribution) 
+Contains all libs and source files compiled and ready for use. (Will be deleted every time gulp builds!!!)
 
 ##Install
 Clone repo and execute the following command:
 - npm install
 
-##Run
-In Webstorm right click gulpfile and show tasks.
+## Tools
+### Gulp
+Gulp provides this project with browser-sync for faster development and makes sure everything in the app folder ends up in the dist folder.
+### Tasks
+##### gulp serve
+Compiles TypeScript, copies all src files to dist, watches for every file change and starts browser-sync.
 
-or 
+##### gulp serve-no-ts
+This task ignores TypeScript if you prefer your IDE compiling TypeScript. Gulp will copy the generated js files to the dist folder.
 
-In commandline:
-- npm run start
+#### Run Gulp
+##### IDE
+If your IDE supports Gulp, you can execute commands from there.
 
-##Content
-####gulpfile.js
-This file compiles and copies all src files to the distribution folder.
+In Webstorm: right click gulpfile.js -> Show Gulp Tasks.
 
-####tsconfig.json
-Options for the TypeScript compiler.
+##### Terminal/nodejs/cmd
+Make sure gulp is globally install: 'npm install -g gulp'.
 
-####/app/
-Contains all libs and source files.
+If you don't have gulp installed you can use npm: 'npm run gulp' || 'npm run gulp-no-ts'.
 
-####/dist/ (distribution) 
-Contains all libs and source files compiled and ready for use. (Will be deleted every time gulp builds!!!)
+##### Alternative
+If you're having difficulties with gulp you can let your IDE compile the files and serve the app folder in localhost.
 
 ##Assignments setup
 ###Assignment 1 Gulp
@@ -35,14 +49,24 @@ process. This tasks defines the sources files, pipes it through 'gulp-TypeScript
 distribution folder.
 ```
 
-###Assignment 2 System.js
+[Gulp API](https://github.com/gulpjs/gulp/blob/master/docs/API.md)
+
+### Assignment 2 System.js
+
+_"Universal dynamic module loader - loads ES6 modules, AMD, CommonJS and global scripts in the browser and NodeJS. Works with both Traceur and Babel.
+ Loads any module format with exact circular reference and binding support.
+ Loads ES6 modules compiled into the System.register bundle format for production, maintaining circular references support.
+ Supports RequireJS-style map, paths, bundles and global shims.
+ Loader plugins allow loading assets through the module naming system such as CSS, JSON or images.
+ Built on top of the ES6 Module Loader polyfill." - system.js_
+
 Currently nothing is happening in our project. Inside the app.ts file is an alert saying everything worked out.
 To get this alert to show up we have to tell System.js to start importing the transpiled files. We only have to
 tell System.js the entry point of our application. After this System.js can import other files through imports in
 the app.ts file.
 ```
 Add the following piece of code to index.html AFTER the lib script tags. If you've done it correctly,
-an alert will pop up in the browser which means that we're done with setting up System.js.
+an alert will pop up in the browser which means that we're done with setting up System.js. 
 ```
 
 ```html
@@ -61,6 +85,7 @@ an alert will pop up in the browser which means that we're done with setting up 
 </script>
 ```
 
+[System.config docs](https://github.com/systemjs/systemjs/blob/master/docs/config-api.md#packages)
 
 ##Assignments ES6
 ###Assignment 1 Classes
@@ -98,9 +123,11 @@ When in app.ts, type Person and let autocompletion do the importing for you.
 _If your IDE does not support this feature, you have to manually import it. The import paths are relative to the
 location of the file that is doing the import._
 ```javascript
-import {Person} from './models/person'; // './' is very important
+import {Person} from './models/person'; // './' is needed for custom files
 import {Person as P} from './models/person'; // also possible
 ```
+
+Now System.js can reach person.ts because app.ts is importing it.
 
 ####Default import/export (0..1 per file)
 ```javascript
@@ -108,8 +135,9 @@ export default class Example {
     //...
 }
 ```
-Default exports are imported differently than regular imports. Since there is only one default export per file 
-(if you define multiple, only the last will exported) the name doesn't matter.
+Default exports are imported differently than regular imports. Since there is only one default export per file the name doesn't matter
+(if you define multiple, only the last will get exported).
+
 ```javascript
 import Example from './example'; //<- Works
 import RandomName from './example'; //<- Works
@@ -117,14 +145,26 @@ import {default as RandomName} from './example'; //<- Works
 import RandomName, {Other} from './example'; //<- Works (let's assume Other is an exported class)
 ```
 
+```
+Think about using default keywords from now on. The person.ts file exports a Person class, this can be
+transfered into a default export.
+```
+
 ###Assignment 3 Playing with transpiling.
-Now that we have 2 interacting files, we're going to have a look at the different possible outputs of the transpiling process.
+Now that we have 2 interacting files, we're going to have a look at the different possible outputs of the transpilation process.
 process. 
 ```
 Take a look at tsconfig's 'target' and 'module' attributes and check the dist folder javascript files content. 
-Change the target and/or module attributes and reset the gulp task to see the different ways of transpiling.
-- target: es5 || es6 (output js version)
-- module: commonjs || amd || system 
+Change the target and/or module attributes and execute the 'ts-compile' task and check the different JS output.
+
+target: (output js version)
+- es5
+- es6 
+
+module: 
+- commonjs
+- amd
+- system 
 ```
 
 ###Assignment 4 Playing with new ES6 Features.
@@ -136,12 +176,12 @@ class Example {
         this.foo = foo;
     }
 }
-let example = new Example('value');
+var example = new Example('value');
 ```
 
 ```
 Append the Person's constructor with 2 parameters, firstName and lastName.
-Let the constructor set its own values. Create a few persons with different names and log them.
+var the constructor set its own values. Create a few persons (in app.ts) with different names and log them.
 ```
 
 ####Class methods + custom interpolation.
@@ -152,7 +192,7 @@ class Example {
         return 'example';
     }
 }
-let example = new Example('value');
+var example = new Example('value');
 example.foo();
 ```
 
@@ -188,11 +228,11 @@ example(1, 2, 3, 4) //4
 ```
 
 ```
-Create a greetMany method that will iterate through a list of people and greet them by name.
-Instead of expecting a list as param, we want to implement the rest param so we can chain parameters.
+Create a greetManyPeople method that will iterate through a list of people and greet them by name.
+Instead of expecting a list as param, we implement the rest param so we can chain parameters.
 ```
 
-####Arrow functions + lexical this
+####Arrow functions (lambda's) + lexical this
 ```javascript
 //problem ES5
 function OuterScope () {
@@ -231,37 +271,40 @@ functions as opposed to functions that create a new scope. This is very handy fo
 all the time. Be aware that sometimes it is necessary to use a normal function so the 'this' does refer to the other scope
 (think about using this inside an onload function of an image, 'this' should refer to the loading image, not the parent scope)
 
-####Let and const keyword.
-```javascript
-//var in IDE
-if(condition) {
-    var foo = 1;
-}
-//var in JSEngine 
-var foo;
-if(conditon) {
-    foo = 1;
-}else { 
-    //Technically foo is available in the else block.
-}
-
-//let in IDE
-if(condition) {
-    let foo = 1;
-}
-//let in JSEngine 
-if(conditon) {
-    let foo = 1;
-}
+```
+Play around with the new arrow function syntax and realize that 'function' will be redundend soon
+(in most cases, not all).
 ```
 
-"let is the new var" - [Is there any reason to use the “var” keyword in ES6?](http://programmers.stackexchange.com/questions/274342/is-there-any-reason-to-use-the-var-keyword-in-es6) 
+#### let keyword.
+```javascript
+function varTest() {
+  var x = 31;
+  if (true) {
+    var x = 71;  // same variable!
+    console.log(x);  // 71
+  }
+  console.log(x);  // 71
+}
 
-"Many common problems in JavaScript are alleviated by using let, so you should use it instead of var whenever possible." - Ty
+function letTest() {
+  let x = 31;
+  if (true) {
+    let x = 71;  // different variable
+    console.log(x);  // 71
+  }
+  console.log(x);  // 31
+}
+```
+Source: [Mozilla developer network let description](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let#Block_scope_with_let)
 
-The new 'let' keyword has solved the block scoping issues of var and is recommended for ES6.
+"Many common problems in JavaScript are alleviated by using let, so you should use it instead of var whenever possible." - TypeScript
 
-Const is the new JS equivalent to Java's final.
+```
+Replace all 'var' keywords with 'let' and use 'let' from now on.
+```
+
+#### const keyword
 ```javascript
 const wontChange = 'Test';
 wontChange = 'OtherTest'; //error
@@ -269,6 +312,11 @@ wontChange = 'OtherTest'; //error
 const willChange = {content: 'Test'};
 willChange.content = 'OtherTest'; //ok
 willChange = {content: 'OtherTest'}; //error
+```
+
+Const is the new JS equivalent to Java's final.
+```
+Implement a constant.
 ```
 
 ####Generators.
@@ -291,12 +339,12 @@ state.
 ```
 Create an id generator inside person.ts (above the Person class) and let it set the id of the
 person in its constructor.
+
+Make another generator in app.ts and change 'true' to a condition. Log something underneath 
+the while loop to see when it gets called and how many times it gets called
 ```
 
 ###Assignment 5 Inheritance 
-Create a new file called client.ts inside the models directory. Inside the file create a Client class that extends from Person.
-For now the client also expects a firstName and lastName, but in stead of setting the values it'll pass it to the Person
-through a super call. 
 ```javascript
 class A {
     constructor() {
@@ -309,6 +357,10 @@ class B extends A {
     }
 }
 ```
+
+Create a new file called client.ts inside the models directory. Inside the file create a Client class that extends from Person.
+For now the client also expects a firstName and lastName, but in stead of setting the values it'll pass it to the Person
+through a super call. 
 
 ##Assignments TypeScript
 IMPORTANT
@@ -418,6 +470,26 @@ Protected variables/methods are private to the outside world, but can be called/
 So imagine that all people can ask questions, meaning only they can take initiative to ask something. A protected method 'ask' would be
 the solution. Person will be able to ask a question just like every subclass (Client in this case).
 Implement a protected 'ask' method that consoles a question and call it (from within the instance).
+
+#### Set access modifiers inside the constructor "shortcut"
+```javascript
+class Example {
+    public foo;
+    constructor(foo) {
+        this.foo = foo;
+    }
+}
+
+//same as
+
+class Example {
+    public foo;
+    constructor(public foo) {
+        this.foo = foo;
+    }
+}
+```
+
 
 ##Assignment 3 Abstract
 ###classes

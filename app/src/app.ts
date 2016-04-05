@@ -20,12 +20,14 @@ class Example {
 }
 console.log(new Example('foo'));
 
-function* IdGenerator() { //Notice the * right after the method keyword, no this is not a typo.
+function* OtherGenerator() { //Notice the * right after the method keyword, no this is not a typo.
     let index = 0;
-    while(index < 4)
+    while(index < 2)
         yield index++;
+    console.log('done')
 }
-let idGen:IterableIterator<number> = IdGenerator();
-console.log(idGen.next().value);
-console.log(idGen.next().value);
-console.log(idGen.next().value);
+let otherGen:IterableIterator<number> = OtherGenerator();
+console.log(otherGen.next().value);//0
+console.log(otherGen.next().value);//1 done
+console.log(otherGen.next().value);//undefined
+

@@ -1,12 +1,9 @@
 function* IdGenerator() { //Notice the * right after the method keyword, no this is not a typo.
     let index = 0;
-    while(index < 4)
+    while(true)
         yield index++;
 }
 let idGen:IterableIterator<number> = IdGenerator();
-console.log(idGen.next().value);
-console.log(idGen.next().value);
-console.log(idGen.next().value);
 export default class Person {
 
     private _id:number = idGen.next().value;
