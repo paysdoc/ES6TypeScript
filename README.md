@@ -55,8 +55,6 @@ Add the following piece of code to index.html AFTER the lib script tags. If you'
 an alert will pop up in the browser which means that we're done with setting up System.js. 
 ```
 
-[System.config docs](https://github.com/systemjs/systemjs/blob/master/docs/config-api.md#packages)
-
 ```html
 <script>
   /**
@@ -73,6 +71,7 @@ an alert will pop up in the browser which means that we're done with setting up 
 </script>
 ```
 
+[System.config docs](https://github.com/systemjs/systemjs/blob/master/docs/config-api.md#packages)
 
 ##Assignments ES6
 ###Assignment 1 Classes
