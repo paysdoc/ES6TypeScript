@@ -228,7 +228,7 @@ new OuterScope();
 ```
 
 As seen in the previous example, arrow scoping works differently than function scoping. The parent scope is kept by arrow
-functions as opposed to new scope-creating-normal-functions. This is very handy for not having to declare 'var self = this'
+functions as opposed to functions that create a new scope. This is very handy for not having to declare 'var self = this'
 all the time. Be aware that sometimes it is necessary to use a normal function so the 'this' does refer to the other scope
 (think about using this inside an onload function of an image, 'this' should refer to the loading image, not the parent scope)
 
