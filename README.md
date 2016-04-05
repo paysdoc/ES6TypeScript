@@ -232,6 +232,44 @@ functions as opposed to functions that create a new scope. This is very handy fo
 all the time. Be aware that sometimes it is necessary to use a normal function so the 'this' does refer to the other scope
 (think about using this inside an onload function of an image, 'this' should refer to the loading image, not the parent scope)
 
+####Let and const keyword.
+```javascript
+//var in IDE
+if(condition) {
+    var foo = 1;
+}
+//var in JSEngine 
+var foo;
+if(conditon) {
+    foo = 1;
+}else { 
+    //Technically foo is available in the else block.
+}
+
+//let in IDE
+if(condition) {
+    let foo = 1;
+}
+//var in JSEngine 
+if(conditon) {
+    let foo = 1;
+}
+```
+
+"let is the new var" - [Is there any reason to use the “var” keyword in ES6?](http://programmers.stackexchange.com/questions/274342/is-there-any-reason-to-use-the-var-keyword-in-es6) 
+
+The new 'let' keyword has solved the block scoping issues of var and is recommended for ES6.
+
+Const is the new JS equivalent to Java's final.
+```javascript
+const wontChange = 'Test';
+wontChange = 'OtherTest'; //error
+
+const willChange = {content: 'Test'};
+willChange.content = 'OtherTest'; //ok
+willChange = {content: 'OtherTest'}; //error
+```
+
 ####Generators.
 !!For generators the tsconfig.json target MUST be es6 since there is no alternative in es5.
 
@@ -248,21 +286,6 @@ var idGen = IdGenerator();
 console.log(idGen.next().value); //0
 console.log(idGen.next().value); //1
 console.log(idGen.next().value); //2
-```
-
-####Let and const keyword.
-"let is the new var" - [Is there any reason to use the “var” keyword in ES6?](http://programmers.stackexchange.com/questions/274342/is-there-any-reason-to-use-the-var-keyword-in-es6) 
-
-The new 'let' keyword has solved the block scoping issues of var and is recommended for ES6.
-
-Const is the new JS equivalent to Java's final.
-```javascript
-const wontChange = 'Test';
-wontChange = 'OtherTest'; //error
-
-const willChange = {content: 'Test'};
-willChange.content = 'OtherTest'; //ok
-willChange = {content: 'OtherTest'}; //error
 ```
 
 ###Assignment 5 Inheritance 
