@@ -436,11 +436,46 @@ class Example {
 }
 new Example().foo({name:'test'});
 ```
+##Assignment 6 Enum
+```javascript
+enum EXAMPLE_ENUM {
+    MON,
+    TUE,
+    WED
+}
+```
+Enumerated types contain multiple values that can be used as fixed types for different purposes.
 
-##Assignment 6 Decorators
+```
+Create an enum called ACCESS_LEVELS and fill it with an ADMIN, CLIENT and ALL level. These values 
+will be used for restricting calls in the next assignment.
+```
+
+##Assignment 7 Decorators
 Decorators are like annotations and can be used to add meta data or behaviour to classes, methods, params and variables.
 ###Class decorators
-<<Decorate a class so it gets registered with extra data Angular 2's @Component equivalent>>
+```javascript
+function Example(target:Object) {
+    let className = target.name;
+}
+@Example
+class ExampleClass {}
+
+//or
+
+function Example(DAY:EXAMPLE_ENUM) {
+    return function (target:Function) {
+        let name = target.name;
+    } 
+}
+@Example(EXAMPLE_ENUM.MON)
+class ExampleClass {}
+```
+
+```
+Create a class decorator called GiveFullPermission that expects an ACCESS_LEVEL value.
+Inside the decorator assign the incoming access level to the target.
+```
 
 ###Method decorators
 ```javascript
@@ -449,6 +484,8 @@ class Example {
     @MyDecorator
     foo() { }
 }
+
+//or
 
 function MyDecorator (value:string) {
     return (target: Object, propertyKey: string, descriptor: TypedPropertyDescriptor<any>) { }
@@ -484,10 +521,18 @@ function LogInAndOut (target: Object, propertyKey: string, descriptor: TypedProp
     return descriptor;
 }
 ```
+
+```
+Create a Secured method decorator that doesn't execute and throws an error if the class's ACCESS_LEVEL 
+doesn't equal to the current user's access level (except when it is all). We don't have a user, 
+so just define a var user and assign it an ACCESS_LEVEL. Decorate a method of the client and call 
+it with different combinations of access levels. 
+```
+
 ###Param decorators
 <<Decorate a param so it prints>>
 
-##Assignment 7 Existing JavaScript (declaration files .d.ts)
+##Assignment 8 Existing JavaScript (declaration files .d.ts)
 If you have written a gigantic JavaScript library, you really don't want to rewrite the thing in TypeScript.
 That's why declaration files exist.
 ```
