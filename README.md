@@ -313,7 +313,8 @@ state.
 Create an id generator inside person.ts (above the Person class) and let it set the id of the
 person in its constructor.
 
-Try to make a generator class with a limit/restriction.
+Make another generator in app.ts and change 'true' to a condition. Log something underneath 
+the while loop to see when it gets called and how many times it gets called
 ```
 
 ###Assignment 5 Inheritance 
