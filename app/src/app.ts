@@ -154,6 +154,7 @@ abstract class Person {
 }
 
 
+
 //var myAccessLevel = ACCESS_ROLES.CLIENT;
 //interface IAccessLevel {
 //    access_level: ACCESS_ROLES;
@@ -233,3 +234,13 @@ new Example().foo({name:'test'});
 //console.log(service.getAll());
 //console.log(service.delete(1));
 //console.log(service.getById(2));
+
+//solution ES6
+function OuterScope () {
+    this.value = 123;
+    var local = () => {
+        console.log(this.value);
+    };
+    local();//undefined
+}
+new OuterScope();

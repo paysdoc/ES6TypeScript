@@ -7,4 +7,3 @@ interface ClientService {
 }
 
 declare function ClientService():void;
-

@@ -166,20 +166,19 @@ var interpolation = `exampleText = ${exampleText}`;
 ```
 
 ####Default params.
+```javascript
+function EXAMPLE(param = 1) {
+    console.log(param) //1 if it's called without parameter.
+}
+```
+
+```
 Give the person a greet method that expects a name and will console 'Hello ${name}!'.
 Imagine the person will say 'Hello nobody!' if we don't give it a name.
 In stead of doing an undefined check we simply give the name param a default value of 'nobody'.
-```javascript
-//default param example
-    (param = 1) {
-        console.log(param) //1 if it's called without parameter.
-    }
 ```
 
 ####Rest param.
-Create a greetMany method that will iterate through a list of people and greet them by name.
-Instead of expecting a list as param, we want to implement the rest param.
-
 ```javascript
 //rest param example
 function restExample(...params) {
@@ -188,6 +187,50 @@ function restExample(...params) {
 restExample(1); //1
 restExample(1, 2, 3, 4) //4
 ```
+
+```
+Create a greetMany method that will iterate through a list of people and greet them by name.
+Instead of expecting a list as param, we want to implement the rest param so we can chain parameters.
+```
+
+####Arrow functions + lexical this
+```javascript
+function OuterScope () {
+    this.value = 123;
+    var local = function () {
+        console.log(this.value);
+    };
+    local();//undefined
+}
+new OuterScope();
+
+//solution ES5
+
+function OuterScope () {
+    this.value = 123;
+    var self = this;
+    var local = function () {
+        console.log(self.value);
+    };
+    local();//123
+}
+new OuterScope();
+
+//solution ES6
+function OuterScope () {
+    this.value = 123;
+    var local = () => {
+        console.log(this.value);
+    };
+    local();//123
+}
+new OuterScope();
+```
+
+As seen in the previous example, arrow scoping works differently than function scoping. The parent scope is kept by arrow
+functions as opposed to new scope-creating-normal-functions. This is very handy for not having to declare 'var self = this'
+all the time. Be aware that sometimes it is necessary to use a normal function so the 'this' does refer to the other scope
+(think about using this inside an onload function of an image, 'this' should refer to the loading image, not the parent scope)
 
 ####Generators.
 !!For generators the tsconfig.json target MUST be es6 since there is no alternative in es5.
