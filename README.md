@@ -7,20 +7,24 @@ Clone repo and execute the following command:
 - npm install
 
 ##Run
-The following command is given by the Angular getting started guide:
-- npm run start (or "gulp build" if gulp is installed globally, or right click gulpfile in Webstorm)
+In Webstorm right click gulpfile and show tasks.
+
+or 
+
+In commandline:
+- npm run start
 
 ##Content
-gulpfile.js
+####gulpfile.js
 This file compiles and copies all src files to the distribution folder.
 
-tsconfig.json
+####tsconfig.json
 Options for the typescript compiler.
 
-/app
+####/app/
 Contains all libs and source files.
 
-/dist (distribution) dir
+####/dist/ (distribution) 
 Contains all libs and source files compiled and ready for use. (Will be deleted every time gulp builds!!!)
 
 ##Assignments setup
