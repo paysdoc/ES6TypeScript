@@ -7,11 +7,14 @@ var gulp = require('gulp'),
     browserSync = require('browser-sync').create();
 
 // gulp
-gulp.task('default', ['build'], function () {
+gulp.task('default', ['serve'], function () {
 });
 // gulp build
-gulp.task('build', ['clean'], function () {
-    runSequence('ts-compile', 'html-copy', 'css-copy', 'js-copy', 'ts-watch', 'browser-sync');
+gulp.task('serve', ['clean'], function () {
+    runSequence('html-copy', 'css-copy', 'js-copy','ts-compile', 'ts-watch', 'browser-sync')
+});
+gulp.task('serve-no-ts', ['clean'], function () {
+    runSequence('html-copy', 'css-copy', 'js-copy', 'browser-sync');
 });
 // delete dist folder
 gulp.task('clean', function (cb) {
