@@ -25,18 +25,20 @@ Contains all libs and source files compiled and ready for use. (Will be deleted 
 
 ##Assignments setup
 ###Assignment 1 Gulp
+```
 Take a look inside the gulpfile.js file at the 'ts-compile' task that takes care of the transpilation process.
-This tasks calls the 'gulp-typescript' plugin with the source files and tells the plugin to transpile
-the code with the options specified in tsconfig.
-
+This tasks defines the sources files, pipes it through 'gulp-typescript' and places inside the distribution folder.
+```
 ###Assignment 2 System.js
 Currently nothing is happening in our project. Inside the app.ts file is an alert saying everything worked out.
 To get this alert to show up we have to tell System.js to start importing the transpiled files. We only have to
 tell System.js the entry point of our application. After this System.js can import other files through imports in
 the app.ts file.
+```
+Add the following piece of code to index.html AFTER the lib script tags. If you've done it correctly, an alert will pop up in the
+browser which means that we're done with setting up System.js.
+```
 
-Add this piece of code to index.html AFTER the lib script tags. If you've done it correctly, a alert will pop up in the
-browser which means we're done with setting up System.js.
 ```html
 <script>
   /**
