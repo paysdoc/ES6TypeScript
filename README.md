@@ -186,6 +186,7 @@ restExample(1, 2, 3, 4) //4
 ```
 
 ####Generators.
+!!For generators the tsconfig.json target MUST be es6 since there is no alternative in es5.
 A completely new feature of ES6 is the generator method. Basically it's a method that can keep track of its own 
 state. Create an id generator inside person.ts (above the Person class) and let it set the id of the person in its constructor.
 Notice the * right after the method keyword, no this is not a typo.

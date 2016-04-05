@@ -77,10 +77,11 @@
 //}
 //var es5Example = new ES5Example();
 
-function* idMaker(){
+function idMaker(){
     var index = 0;
-    while(true)
-        yield index++;
+    //while(true)
+    //    yield index++;
+    return 1;
 }
 var idGen = idMaker();
 interface IAuth {
@@ -135,7 +136,7 @@ new Test().test(1, 2);
 abstract class Person {
     firstName;
     lastName;
-    private _id = idGen.next().value;
+    private _id = idGen;
     protected askQueston ():void {
         //console.log(this.firstName + ': Question?');
     }
