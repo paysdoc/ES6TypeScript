@@ -19,3 +19,13 @@ class Example {
     constructor(public foo) {}
 }
 console.log(new Example('foo'));
+
+function* IdGenerator() { //Notice the * right after the method keyword, no this is not a typo.
+    let index = 0;
+    while(index < 4)
+        yield index++;
+}
+let idGen:IterableIterator<number> = IdGenerator();
+console.log(idGen.next().value);
+console.log(idGen.next().value);
+console.log(idGen.next().value);
