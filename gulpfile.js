@@ -56,6 +56,8 @@ gulp.task('browser-sync', function() {
             'dist/**/*.js',
             'dist/**/*.html',
             'dist/**/*.css',
-        ]
+        ],
+        logLevel: 'silent', //debug || info
+        notify: false
     });
 });
