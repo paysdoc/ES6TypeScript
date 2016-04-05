@@ -35,15 +35,26 @@ process. This tasks defines the sources files, pipes it through 'gulp-TypeScript
 distribution folder.
 ```
 
+[Gulp API](https://github.com/gulpjs/gulp/blob/master/docs/API.md)
+
 ###Assignment 2 System.js
+_"Universal dynamic module loader - loads ES6 modules, AMD, CommonJS and global scripts in the browser and NodeJS. Works with both Traceur and Babel.
+ Loads any module format with exact circular reference and binding support.
+ Loads ES6 modules compiled into the System.register bundle format for production, maintaining circular references support.
+ Supports RequireJS-style map, paths, bundles and global shims.
+ Loader plugins allow loading assets through the module naming system such as CSS, JSON or images.
+ Built on top of the ES6 Module Loader polyfill." - system.js_
+
 Currently nothing is happening in our project. Inside the app.ts file is an alert saying everything worked out.
 To get this alert to show up we have to tell System.js to start importing the transpiled files. We only have to
 tell System.js the entry point of our application. After this System.js can import other files through imports in
 the app.ts file.
 ```
 Add the following piece of code to index.html AFTER the lib script tags. If you've done it correctly,
-an alert will pop up in the browser which means that we're done with setting up System.js.
+an alert will pop up in the browser which means that we're done with setting up System.js. 
 ```
+
+[System.config docs](https://github.com/systemjs/systemjs/blob/master/docs/config-api.md#packages)
 
 ```html
 <script>
