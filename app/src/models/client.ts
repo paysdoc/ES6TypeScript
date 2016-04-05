@@ -4,4 +4,4 @@ export default class Client extends Person{
         super(firstName, lastName);
     }
 }
-var client = new Client('1', '2');
+var client = new Client('1', '3');
