@@ -92,12 +92,12 @@ interface IAuth {
 //console.log(new Client('Karel'));
 //console.log(new Client('Kees'));
 
-class Example {
-    text:string;
-    getNumber():number {
-        return 1;
-    }
-}
+//class Example {
+//    text:string;
+//    getNumber():number {
+//        return 1;
+//    }
+//}
 
 
 function LogInAndOut (target: Object, propertyKey: string, descriptor: TypedPropertyDescriptor<any>) {
@@ -211,13 +211,24 @@ function test(walker:IWalk) {
 test(dog);
 test(client);
 
+class Example {
+    foo(obj:{}) {
+        //console.log(obj.name);//error
+        let customTypedObj = <{name:string}>obj;
+        console.log(customTypedObj.name);//compiles
+        console.log((<{name:string}>obj).name);//compiles
+        console.log((<any>obj).name);//compiles
+    }
+}
+new Example().foo({name:'test'});
 
-var service = new ClientService();
 
-service.add(new Client('Jan'));
-service.add(new Client('Kees'));
-service.add(new Client('Karel'));
-console.log(service.getById(1));
-console.log(service.getAll());
-console.log(service.delete(1));
-console.log(service.getById(2));
+//var service = new ClientService();
+//
+//service.add(new Client('Jan'));
+//service.add(new Client('Kees'));
+//service.add(new Client('Karel'));
+//console.log(service.getById(1));
+//console.log(service.getAll());
+//console.log(service.delete(1));
+//console.log(service.getById(2));

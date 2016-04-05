@@ -8,7 +8,7 @@ Clone repo and execute the following command:
 
 ##Run
 The following command is given by the Angular getting started guide:
-- npm run start (or "gulp build" if gulp is installed globally)
+- npm run start (or "gulp build" if gulp is installed globally, or right click gulpfile in Webstorm)
 
 ##Content
 gulpfile.js
@@ -387,7 +387,8 @@ Now it's possible to create a method that expects something that can walk and ac
 even though they are different classes.
 ```
 
-##Assignment 5 Custom types
+##Assignment 5 Types
+###Custom
 ```
 class Example {
     foo(item: {index:number, name: string}):void {}
@@ -404,6 +405,23 @@ serves as a type.
 ```
 Replace the previously created inline custom type with an interface type.
 ```
+
+###Conflicting
+```
+class Example {
+    foo(obj:{}) {
+        console.log(obj.name);//error
+        let customTypedObj = <{name:string}>obj;
+        console.log(customTypedObj.name);//compiles
+        console.log((<{name:string}>obj).name);//compiles
+        console.log((<any>obj).name);//compiles
+    }
+}
+new Example().foo({name:'test'});
+```
+Sometimes you know there's a certain variable available in an object, but Typescript will not let you call it (because of
+a different assigned type). To overcome this you either have to set the correct typ so the error goes away, or you cheat
+and cast the object to a different type. In the end it's still JavaScript so this only affects compiletime. 
 
 ##Assignment 6 Decorators
 Decorators are like annotations and can be used to add meta data or behaviour to classes, methods, params and variables.
