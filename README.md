@@ -320,6 +320,7 @@ Print the id of an instantiated Person and try to set its id.
 ```
 
 ####protected
+
 ```javascript
 class Example {
     protected foo:string;

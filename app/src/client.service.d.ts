@@ -8,16 +8,3 @@ interface ClientService {
 
 declare function ClientService():void;
 
-class Example {
-    protected foo:string;
-}
-let example = new Example();
-example.foo //error
-example.foo = 'something'; //error
-
-class ExampleChild extends Example {
-    constructor() {
-        super();
-        this.foo; //ok
-    }
-}
