@@ -13,9 +13,7 @@ export default abstract class Person {
     get id():number {
         return this._id;
     }
-    greet(name:string = 'nobody'):void {
-        console.log(`Hello ${name}`);
-    }
+    abstract greet(name:string = 'nobody'):void;
     greetManyPeople(...people:Array<Person>):void {
         for(let i = 0; i < people.length; i++) {
             this.greet(people[i].firstName);
