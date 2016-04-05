@@ -55,7 +55,7 @@ gulp.task('browser-sync', function() {
         files: [
             'dist/**/*.js',
             'dist/**/*.html',
-            'dist/**/*.css',
+            'dist/**/*.css'
         ],
         logLevel: 'silent', //debug || info
         notify: false
