@@ -6,7 +6,7 @@
 Clone repo and execute the following command:
 - npm install
 
-##Run
+## Run
 In Webstorm right click gulpfile.js -> Show Gulp Tasks.
 
 or 
@@ -14,17 +14,19 @@ or
 In commandline:
 - npm run start
 
+_Gulp contains browser sync for making developing easier. I recommend using Gulp _
+
 ##Content
-####gulpfile.js
+*gulpfile.js* 
 This file compiles and copies all src files to the distribution folder.
 
-####tsconfig.json
+#####tsconfig.json
 Options for the TypeScript compiler.
 
-####/app/
+#####/app/
 Contains all libs and source files.
 
-####/dist/ (distribution) 
+#####/dist/ (distribution) 
 Contains all libs and source files compiled and ready for use. (Will be deleted every time gulp builds!!!)
 
 ##Assignments setup
