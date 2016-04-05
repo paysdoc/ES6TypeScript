@@ -272,20 +272,23 @@ willChange = {content: 'OtherTest'}; //error
 
 ####Generators.
 !!For generators the tsconfig.json target MUST be es6 since there is no alternative in es5.
-
-A completely new feature of ES6 is the generator method. Basically it's a method that can keep track of its own 
-state. Create an id generator inside person.ts (above the Person class) and let it set the id of the person in its constructor.
-Notice the * right after the method keyword, no this is not a typo.
 ```javascript
-function* IdGenerator(){
+function* Example() { //Notice the * right after the method keyword, no this is not a typo.
     var index = 0;
     while(true)
         yield index++;
 }
-var idGen = IdGenerator();
-console.log(idGen.next().value); //0
-console.log(idGen.next().value); //1
-console.log(idGen.next().value); //2
+var example = Example();
+console.log(example.next().value); //0
+console.log(example.next().value); //1
+console.log(example.next().value); //2
+```
+
+A completely new feature of ES6 is the generator method. Basically it's a method that can keep track of its own 
+state. 
+
+```
+Create an id generator inside person.ts (above the Person class) and let it set the id of the person in its constructor.
 ```
 
 ###Assignment 5 Inheritance 
