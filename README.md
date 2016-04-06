@@ -42,8 +42,15 @@ If you don't have gulp installed you can use npm: 'npm run gulp' || 'npm run gul
 If you're having difficulties with gulp you can let your IDE compile the files and serve the app folder in localhost.
 
 ## Assignment
-Start migrating the application to TypeScript.
+Start creating your own Angular 1 app in ES6+TS.
 Tips:
 - There are declaration files included for the Angular API. This means there's a type and autocompletion for
 every Angular method.
-- 
+- The fakeBackend module provides a $httpBackend that mocks responses for if you want to test $http.
+```
+GET     /clients        | Returns all clients without additional information
+GET     /clients/:id    | Returns one single client including additional information.
+POST    /clients        | Creates a new client.
+PUT     /clients/:id    | Updates existing client.
+DELETE  /clients/:id    | Deletes existing client.
+```
