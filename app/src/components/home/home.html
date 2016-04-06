@@ -4,19 +4,19 @@
 </div>
 <div class="content">
     <div class="row large-height center" ng-if="!!$ctrl.user">
-        <div class="block center icon full" ng-click="showList()">
+        <div class="block center icon full" ng-click="$ctrl.showList()">
             <i class="material-icons">view_list</i>
             <p>Clients Overview</p>
         </div>
     </div>
     <div class="row large-height center" ng-if="!$ctrl.user">
-        <div class="block center icon full" ng-click="showLogin()">
+        <div class="block center icon full" ng-click="$ctrl.showLogin()">
             <i class="material-icons">check</i>
             <p>Login</p>
         </div>
     </div>
     <div class="row large-height center" ng-if="$ctrl.user == 'admin'">
-        <div class="block center icon full" ng-click="reset()">
+        <div class="block center icon full" ng-click="$ctrl.reset()">
             <i class="material-icons">settings_backup_restore</i>
             <p>Clear local storage</p>
             <p>(default db values)</p>
