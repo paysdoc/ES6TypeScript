@@ -61,9 +61,8 @@ _"Universal dynamic module loader - loads ES6 modules, AMD, CommonJS and global 
  Built on top of the ES6 Module Loader polyfill." - system.js_
 
 Currently nothing is happening in our project. Inside the app.ts file is an alert saying everything worked out.
-To get this alert to show up we have to tell System.js to start importing the transpiled files. We only have to
-tell System.js the entry point of our application. After this System.js can import other files through imports in
-the app.ts file.
+To get this alert to show up we have to tell System.js to start importing the transpiled files. System.js only needs an entry point (file).
+After this, System.js can import other files through imports in app.ts.
 ```
 Add the following piece of code to index.html AFTER the lib script tags. If you've done it correctly,
 an alert will pop up in the browser which means that we're done with setting up System.js. 
@@ -103,7 +102,7 @@ Create a Person class inside the person.ts file with the following variables:
 - lastName
 - id
 ```
-_This person file WILL be transpiled by gulp-TypeScript to js, but WILL NOT be included in the browser._
+_This person file WILL be transpiled by gulp-typescript to js, but WILL NOT be included in the browser._
 
 ###Assignment 2 Importing/Exporting
 ####Regular import/export (0..n per file)
@@ -426,11 +425,11 @@ In Java it's considered a good practice to make every single variable private an
 In JavaScript this is also possible.
 ```javascript
 class Example {
-    private _foo; //The underscore is there to prevent namecollision with the get/set method name.
-    get foo() {
+    private _foo:string; //The underscore is there to prevent namecollision with the get/set method name.
+    get foo():string {
         return this._foo;
     }
-    set foo(foo) {
+    set foo(foo:string) {
         this._foo = foo;
     }
 }
@@ -470,13 +469,13 @@ Protected variables/methods are private to the outside world, but can be called/
 So imagine that all people can ask questions, meaning only they can take initiative to ask something. A protected method 'ask' would be
 the solution. Person will be able to ask a question just like every subclass (Client in this case).
 ```
-Implement a protected 'ask' method that consoles a question and call it (from within and outside the class).
+Implement a protected 'ask' method that consoles a question and call it (try inside the class and outside).
 ```
 #### Set access modifiers inside the constructor "shortcut"
 ```javascript
 class Example {
-    public foo;
-    constructor(foo) {
+    public foo:string;
+    constructor(foo:string) {
         this.foo = foo;
     }
 }
@@ -484,21 +483,21 @@ class Example {
 //same as
 
 class Example {
-    constructor(public foo) {
+    constructor(public foo:string) {
     
     }
 }
 ```
 
-##Assignment 3 Abstract
-###classes
+### Assignment 3 Abstract
+#### classes
 ```javascript
 abstract class Example {
     
 }
 new Example() //error
 ```
-Person is a very generic class and term. In applications we never talk about a person, we rather talk about clients, employees and
+Person is a very generic class and term. In applications we don't talk about a person, we rather talk about clients, employees and
 admins. Those types of people have something in common, they're people. We want to define a person, but never instantiate it 
 because it only serves as a super class to other types of people.
 ```
@@ -507,16 +506,16 @@ before the 'class' keyword. Don't forget to move the _id generator out of the co
 because abstract classes can't have constructors here. (It is possible to instantiate an 
 abstract class if it has a constructor, this is probably a bug?).
 ```
-###methods
+#### methods
 ```javascript
 abstract class Example {
-    abstract foo();
+    abstract foo():void;
 }
-class NotAbstractClass extends Example { //error must implement a foo function.
+class NotAbstractClass extends Example { //error must implement a foo:void function.
     
 }
 ```
-Abstract methods are methods without a body that MUST be implemented by the subclass of the abstract class.
+An abstract method is a without a body {} that MUST be implemented by the subclass of the abstract class.
 ```
 Since a Person will never have to greet another person, remove the body and add the 'abstract' 
 keyword in front of it. The TypeScript compiler should complain about the Client class for not
@@ -525,7 +524,19 @@ having a greet method.
 Now we force every subclass of Person to implement the greet method. Implement the greet function
 in Client with something client specific.
 ```
-##Assignment 4 interfaces
+### Assignment 4 interfaces
+```
+interface IExample {
+    foo():void;
+}
+class Example implements IExample {
+    foo():void {
+        //implementation
+    }
+}
+function test(iExample:IExample) {}
+test(Example);//ok
+```
 Interfaces serve multiple purposes in TypeScript. As the Java equivalent of interfaces and 
 (as you'll see in the next assignment) as a type.
 
@@ -538,8 +549,8 @@ Now it's possible to create a method that expects something that can walk and ac
 even though they are different classes.
 ```
 
-##Assignment 5 Types
-###Custom
+### Assignment 5 Types
+#### Custom
 ```javascript
 class Example {
     foo(item: {index:number, name: string}):void {}
@@ -557,7 +568,7 @@ serves as a type.
 Replace the previously created inline custom type with an interface type.
 ```
 
-###Conflicting
+#### Conflicting
 ```javascript
 class Example {
     foo(obj:{}) {
@@ -571,17 +582,21 @@ a different assigned type). To overcome this you either have to set the correct 
 and cast the object to a different type. In the end it's still JavaScript so this only affects compiletime. 
 
 ```javascript
+interface IHasName {
+    name:string;
+}
 class Example {
     foo(obj:{}) {
         let customTypedObj = <{name:string}>obj;
         console.log(customTypedObj.name);//compiles
         console.log((<{name:string}>obj).name);//compiles
         console.log((<any>obj).name);//compiles
+        console.log((<IHasName>obj).name);//compiles
     }
 }
 new Example().foo({name:'test'});
 ```
-##Assignment 6 Enum
+### Assignment 6 Enum
 ```javascript
 enum EXAMPLE_ENUM {
     MON,
@@ -596,9 +611,9 @@ Create an enum called ACCESS_LEVELS and fill it with an ADMIN, CLIENT and ALL le
 will be used for restricting calls in the next assignment.
 ```
 
-##Assignment 7 Decorators
+### Assignment 7 Decorators
 Decorators are like annotations and can be used to add meta data or behaviour to classes, methods, params and variables.
-###Class decorators
+#### Class decorators
 ```javascript
 function Example(target:Object) {
     let className = target.name;
@@ -611,6 +626,7 @@ class ExampleClass {}
 function Example(DAY:EXAMPLE_ENUM) {
     return function (target:Function) {
         let name = target.name;
+        console.log(name + DAY);
     } 
 }
 @Example(EXAMPLE_ENUM.MON)
@@ -619,10 +635,10 @@ class ExampleClass {}
 
 ```
 Create a class decorator called GiveFullPermission that expects an ACCESS_LEVEL value.
-Inside the decorator assign the incoming access level to the target.
+Inside the decorator assign the incoming access level to the target (casting required).
 ```
 
-###Method decorators
+#### Method decorators
 ```javascript
 function MyDecorator (target: Object, propertyKey: string, descriptor: TypedPropertyDescriptor<any>) { }
 class Example {
@@ -669,15 +685,15 @@ function LogInAndOut (target: Object, propertyKey: string, descriptor: TypedProp
 
 ```
 Create a Secured method decorator that doesn't execute and throws an error if the class's ACCESS_LEVEL 
-doesn't equal to the current user's access level (except when it is all). We don't have a user, 
+doesn't equal to the current user's access level (except when it is ALL). We don't have a user, 
 so just define a var user and assign it an ACCESS_LEVEL. Decorate a method of the client and call 
 it with different combinations of access levels. 
 ```
 
-###Param decorators
+#### Param decorators
 <<Decorate a param so it prints>>
 
-##Assignment 8 Existing JavaScript (declaration files .d.ts)
+### Assignment 8 Existing JavaScript (declaration files .d.ts)
 If you have written a gigantic JavaScript library, you really don't want to rewrite the thing in TypeScript.
 That's why declaration files exist.
 ```
@@ -728,4 +744,11 @@ declare function ClientService():void;
 // Usually your application should create a reference to the declaration file, but it seems to work
 // without it (Webstorm 11).
 /// <references path="./client.service.d.ts" />
+```
+## Extra assignments
+```
+You have 3 options to continue this workshop:
+- Keep expanding this code with the new features.
+- Go to the 'typescript' branch and experience migrating a small Angular 1 app to ES6+TS (everthing is set up).
+- Go to the 'angular1-start' branch for an empty Angular 1 project configured with ES6+TS and start coding.
 ```
