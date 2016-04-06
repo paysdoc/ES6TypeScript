@@ -49,3 +49,11 @@ Tips:
 that your new TS output gets overridden by the old js. Change the extension of the file to prevent this.
 - There are declaration files included for the Angular API. This means there's a type and autocompletion for
 every Angular method.
+- The fakeBackend module provides a $httpBackend that mocks responses for if you want to test $http.
+```
+GET     /clients        | Returns all clients without additional information
+GET     /clients/:id    | Returns one single client including additional information.
+POST    /clients        | Creates a new client.
+PUT     /clients/:id    | Updates existing client.
+DELETE  /clients/:id    | Deletes existing client.
+```
