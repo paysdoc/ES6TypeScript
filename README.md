@@ -471,6 +471,20 @@ the solution. Person will be able to ask a question just like every subclass (Cl
 ```
 Implement a protected 'ask' method that consoles a question and call it (try inside the class and outside).
 ```
+
+#### static
+```javascript
+class Example {
+    static foo:string;
+}
+let example = new Example();
+example.foo //error
+Example.foo;//ok
+
+```
+
+Static properties/methods are unique. This means that there can only be 1 per class and not per instance.
+
 #### Set access modifiers inside the constructor "shortcut"
 ```javascript
 class Example {
