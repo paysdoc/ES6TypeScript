@@ -383,7 +383,7 @@ class Example {
 }
 ```
 
-###Assignment 2 Access modifiers
+### Assignment 2 Access modifiers (Encapsulation)
 
 For the rest of the workshop, think about your Class variables/methods visibilities (public/private/protected). This will help
 to optimise your auto completion and code structure.
@@ -560,7 +560,7 @@ When comparing a dog and a client, we can conlcude that they both are able to wa
 is nog big enough to create a common superclass and can be solved by an interfcace. Create an interface
 called IWalk that implements a walk():void method. Let the Client and Dog implement the IWalk interface.
 Now it's possible to create a method that expects something that can walk and accepts a Client and a Dog
-even though they are different classes.
+even though they are different classes (Polymorphism).
 ```
 
 ### Assignment 5 Types
