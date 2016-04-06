@@ -13,43 +13,7 @@
     <script src="../libs/angular-mock.js"></script>
     <script src="../libs/fake-backend.js"></script>
     <script src="../libs/system.js"></script>
-    <!--<script src="components/home/home.js"></script>-->
-    <!--<script src="components/login/login.js"></script>-->
-    <!--<script src="components/client_overview/client_overview.js"></script>-->
-    <!--<script src="components/client_detail/client_detail.js"></script>-->
-    <!--<script src="components_shared/header/header.js"></script>-->
-    <!--<script src="services/client.service.js"></script>-->
-    <!--<script src="services/user.service.js"></script>-->
     <script>
-        /**
-         *  Path's that have to be loaded AFTER the asynchronous import of System.js is completed.
-         */
-        const sources = [
-                'components/home/home.js',
-                'components/login/login.js',
-                'components/client_overview/client_overview.js',
-                'components/client_detail/client_detail.js',
-                'components_shared/header/header.js',
-                'services/client.service.js',
-                'services/user.service.js'
-            ];
-        /**
-         *  Creates script element for each script path and appends it to the head.
-         *  onLoadCb is called after the last script has been fully loaded.
-        */
-        function loadScripts(onLoadCb) {
-            var loaded = 0;
-            for(var i = 0; i < sources.length; i++) {
-                var script = document.createElement('script');
-                script.onload = function () {
-                    if(scripts.length == ++loaded) {
-                        onLoadCb();
-                    }
-                };
-                script.src = sources[i];
-                document.head.appendChild(script);
-            }
-        }
         /**
          *  System.js will add a .js extension to every import.
          *  On compiletime the IDE can find the appropriate ts files.
@@ -61,17 +25,10 @@
          */
         System.import('./app')
                 /**
-                 *  After System.js is done with importing the app.js (dist), the other js files
-                 *  will be loaded. Other js files are depending on the angular module in app.ts.
+                 *  After System.js is done with importing the app.js (dist), bootstrap Angular.
                  */
                 .then(function onImport () {
-                    /**
-                     *  Append script tags to the head element.
-                     *  After the last scripts has loaded, we bootstrap angular (equivalent to ng-app="qApp" in body)
-                     */
-                    loadScripts(function onLoad () {
-                        angular.bootstrap(document.body, ['qApp']);
-                    })
+                    angular.bootstrap(document.body, ['qApp']);
                 });
     </script>
 </head>

@@ -1,9 +1,0 @@
-<header class="base-color box-shadow">
-    <i id="backIcon" class="material-icons" ng-if="!!header.backUrl" ng-click="header.goBack()">navigate_before</i>
-    <div id="logoutIcon" ng-if="!!header.user" ng-click="header.logout()">
-        <i class="material-icons">exit_to_app</i>
-        <p>Logout</p>
-    </div>
-    <h2>{{header.title}}</h2>
-    <p ng-if="!!header.user" class="description"><br/>Logged in as {{header.user}}</p>
-</header>
